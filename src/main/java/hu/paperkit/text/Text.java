@@ -67,8 +67,87 @@ public final class Text {
         if (input == null) {
             return Component.empty();
         }
-        return MM.deserialize(translate(input), resolvers);
+        return MM.deserialize(translate(centerize(input)), resolvers);
     }
+    /**
+     * Kattinthato kolcs: link megnyitasa (automatikus hover-tippelessel).
+     *
+     * @param text a megjeleno szoveg (MiniMessage)
+     * @param url  a megnyitando URL
+     * @return a link-klikkelo Component
+     */
+    public static Component link(final String text, final String url) {
+        return parse(text)
+                .clickEvent(net.kyori.adventure.text.event.ClickEvent.openUrl(url))
+                .hoverEvent(net.kyori.adventure.text.event.HoverEvent.showText(
+                        parse("<yellow>Kattints a megnyitasahoz! <white> " + url)));
+    }
+
+    /**
+     * MiniMessage-gradient gyorsito: a hex-szinek megadasa parameterkent.
+     *
+     * @param text   a szoveg (MiniMessage)
+     * @param colors a hex-szinek (# nelkul), pl. (FF0000, 00FF00)
+     * @return gradient-komponens
+     */
+    public static Component gradient(final String text, final String... colors) {
+        if (colors == null || colors.length == 0) {
+            return parse(text);
+        }
+        final StringBuilder tag = new StringBuilder("<gradient:#");
+        for (int i = 0; i < colors.length; i++) {
+            if (i > 0) {
+                tag.append(":#");
+            }
+            tag.append(colors[i].replace("#", ""));
+        }
+        tag.append(">").append(text);
+        return parse(tag.toString());
+    }
+
+    /**
+     * A center tag kozepre igazitasa: a szoveg elere szokoz toked,
+     * a becsult betu-uszelessag szamlalasaval.
+     *
+     * @param input az eredeti szoveg
+     * @return a kozepre igazitott (padding) szoveg
+     */
+    public static String centerize(final String input) {
+        if (input == null || input.indexOf("<center>") < 0) {
+            return input;
+        }
+        final StringBuilder out = new StringBuilder(input.length() + 32);
+        int from = 0;
+        while (true) {
+            final int start = input.indexOf("<center>", from);
+            if (start < 0) { out.append(input, from, input.length()); break; }
+            final int end = input.indexOf("</center>", start);
+            if (end < 0) { out.append(input, from, input.length()); break; }
+            out.append(input, from, start);
+            out.append(centerInner(input.substring(start + 8, end)));
+            from = end + 9;
+        }
+        return out.toString();
+    }
+
+    /** Becsult karakter-szelesseg pixelben (vanilla font). */
+    private static int charWidth(final char c) {
+        if (c == ' ') { return 4; }
+        if ("iljtf.,:;'|!()[]".indexOf(c) >= 0) { return 2; }
+        return 6;
+    }
+
+    private static String centerInner(final String inner) {
+        final String plain = plain(inner);
+        int width = 0;
+        for (final char c : plain.toCharArray()) {
+            width += charWidth(c);
+        }
+        final int chatWidth = 300;
+        final int pad = Math.max(0, (chatWidth - width) / 2 / 4);
+        return " ".repeat(pad) + inner;
+    }
+
 
     /**
      * Csak MiniMessage parsl-ol legacy n lekuni.

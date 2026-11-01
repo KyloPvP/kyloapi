@@ -59,6 +59,8 @@ public final class Channel {
     private String suggestCommand;
     /** Kattintas: parancs lefuttatasa. */
     private String runCommand;
+    /** Kattintas a nevre: link megnyitasa (elso sorrend). */
+    private String clickUrl;
 
     private Channel(final String id) {
         this.id = id == null ? "channel" : id.toLowerCase();
@@ -181,6 +183,17 @@ public final class Channel {
     }
 
     /**
+     * Kattintas a nevre: link megnyitasa (felulirja a run/suggest-et).
+     *
+     * @param url a megnyitando URL, pl. "https://kylo.hu"
+     * @return this
+     */
+    public Channel url(final String url) {
+        this.clickUrl = url;
+        return this;
+    }
+
+    /**
      * @return a csatorna azonosito (kisbetus)
      */
     public String id() {
@@ -265,7 +278,9 @@ public final class Channel {
             name = name.hoverEvent(HoverEvent.showText(MiniMessage.miniMessage()
                     .deserialize(Placeholders.apply(hover, player))));
         }
-        if (runCommand != null) {
+        if (clickUrl != null) {
+            name = name.clickEvent(ClickEvent.openUrl(clickUrl));
+        } else if (runCommand != null) {
             name = name.clickEvent(ClickEvent.runCommand(runCommand.replace("{player}", player.getName())));
         } else if (suggestCommand != null) {
             name = name.clickEvent(ClickEvent.suggestCommand(suggestCommand.replace("{player}", player.getName())));

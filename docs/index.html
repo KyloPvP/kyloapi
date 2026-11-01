@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KyloAPI — Minecraft plugin API (Paper 26.3+)</title>
-  <meta name="description" content="KyloAPI: minden-egyben Minecraft plugin API Paper szerverekhez — magyarul dokumentálva.">
+  <title>KyloAPI — dokumentáció · Minecraft plugin API (Paper 26.3+)</title>
+  <meta name="description" content="KyloAPI dokumentáció: menük, chat, HUD, hologramok, packet-vizuálok és 28+ integráció — teljes magyar referencia Paper 26.3+ szerverekhez.">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 </head>
@@ -13,258 +13,839 @@
 <div class="glowbg"></div>
 <div class="gridbg"></div>
 
-<!-- felső sáv (daisy beta-sorra gondolva) -->
 <div class="strip">
-  <span class="badge">✦ API</span>
-  <span><b>Nyílt könyvtár</b> · MIT licenc · folyamatos fejlesztés · készül CasaKylo műhelyében</span>
+  <span class="badge">✦ DOKUMENTÁCIÓ</span>
+  <span><b>KyloAPI 1.0</b> · Paper 26.3+ · JDK 21+ · MIT licenc · a hookok futásidőben, reflexióval kötődnek</span>
 </div>
 
-<!-- navbar -->
 <nav class="nav">
   <a class="logo" href="#top"><span class="mark">⚡</span>KyloAPI</a>
-  <a class="pill" href="#modulok">Modulok</a>
+  <a class="pill" href="#leptet">Kezdés</a>
+  <a class="pill" href="#menu">Menu</a>
   <a class="pill" href="#chat">Chat</a>
-  <a class="pill" href="#vizual">Vizuál</a>
+  <a class="pill" href="#hud">HUD</a>
+  <a class="pill" href="#combat">Combat</a>
+  <a class="pill" href="#npc">NPC</a>
   <a class="pill" href="#hooks">Hookok</a>
-  <a class="pill" href="#inditas">Kezdés</a>
   <a class="gh" href="https://github.com/KyloPvP/kyloapi" target="_blank" rel="noopener">GitHub ↗</a>
 </nav>
 
 <main class="wrap" id="top">
 
-  <!-- hero: bal szöveg / jobb mock -->
-  <section class="hero">
-    <div class="reveal">
-      <span class="kicker">✦ MINECRAFT SZERVEREKNEK · PAPER 26.3+</span>
+  <!-- hero — rövid, tényszerű -->
+  <section class="hero" style="margin-bottom: 30px;">
+    <div class="reveal" style="max-width: 720px;">
+      <span class="kicker">✦ MINDEN EGY KÖNYVTÁRBAN</span>
       <h1>Kylo<span class="a">API</span></h1>
-      <p class="tagline">(M)Egy API — tíze plugin-ötlet.</p>
+      <p class="tagline">Teljes plugin-keretrendszer Paper 26.3+ szerverekhez.</p>
       <p class="desc">
-        <b>Minden egyben</b> Minecraft plugin-könyvtár Paper szerverekhez:
-        menük, chat, hologram, animáció, HUD és packet-szintű vizuálok —
-        <b>magyar fejlesztőnek, magyar dokumentációval</b>.
+        Menük, chat-rendszer, HUD-elemek, hologramok, packet-szintű vizuálok és
+        <b>28 plugin-integracio</b> -- egyetlen jar-ban. Ez az oldal a teljes
+        referencia: minden pelda az API tenyleges, leforditott
+        metodusalairasait mutatja.
       </p>
       <div class="actions">
-        <a class="btn primary" href="#inditas">Kezdj bele <span class="arrow">→</span></a>
+        <a class="btn primary" href="#leptet">Első lépések <span class="arrow">→</span></a>
         <a class="btn ghost" href="https://github.com/KyloPvP/kyloapi" target="_blank" rel="noopener">
-          <span style="opacity:.6">▷</span> Nézd meg a kódot
+          <span style="opacity:.6">▷</span> Forráskód a GitHubon
         </a>
       </div>
-      <p class="mini">JDK 21+ · Zero konfigu · A menuket elég egy <b>guis.yml</b>-ből is olvassa.</p>
-    </div>
-
-    <div class="mock reveal">
-      <div class="win">
-        <div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i><span class="url">plugin://sajatplugin</span></div>
-        <div class="inner">
-          <div class="rows">
-            <div class="row"><span class="chk">✓</span><b>ChatEngine</b>&nbsp;start() &nbsp;·&nbsp; csatornák, slow-mode</div>
-            <div class="row"><span class="chk">✓</span><b>CombatVisuals</b>&nbsp;enable() &nbsp;·&nbsp; popup, crit, combo</div>
-            <div class="row"><span class="chk">✓</span><b>NpcKit</b>&nbsp;spawn() &nbsp;·&nbsp; per-player NPC és dialógus</div>
-            <div class="row"><span class="chk">✓</span><b>HudBars</b>&nbsp;bar() &nbsp;·&nbsp; HP / mana / progress</div>
-            <div class="row"><span class="chk">✓</span><b>GuiLoader</b>&nbsp;open() &nbsp;·&nbsp; guis.yml menuk</div>
-            <div class="row"><span class="chk">✓</span><b>CinematicKit</b>&nbsp;play() &nbsp;·&nbsp; kamera-utak</div>
-          </div>
-        </div>
-      </div>
-      <div class="phone glass">
-        <div class="time"><span>22:27</span><span>5G ▮▮▮</span></div>
-        <div class="app">
-          <span class="l"></span>
-          <span class="l acc" style="width:70%"></span>
-          <span class="l"></span>
-          <span class="l hot"></span>
-          <span class="l" style="width:85%"></span>
-          <span class="l acc" style="width:50%"></span>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- statisztika -->
-  <section class="stats">
-    <div class="stat glass reveal"><div class="n" data-count="30">0</div><div class="t">modul — menü, chat, HUD, NPC, packet...</div></div>
-    <div class="stat glass reveal"><div class="n" data-count="28">0</div><div class="t">integráció — Vault-tól WorldGuard-ig</div></div>
-    <div class="stat glass reveal"><div class="n" data-count="1000">0</div><div class="t">legacy- és MiniMessage-szín, HEX, gradient</div></div>
-    <div class="stat glass reveal"><div class="n">0</div><div class="t">külső runtime-függőség — mind reflexióval</div></div>
-  </section>
+  <!-- DOKUMENTÁCIÓ -->
+  <div class="layout">
 
-  <!-- modulok -->
-  <h2 class="sec-title" id="modulok"><span class="ic">📦</span>Modulok</h2>
-  <section class="grid">
-    <div class="tile glass reveal">
-      <h3>🖥️ Menu &amp; GUI <span class="tag ok">kész</span></h3>
-      <p>Inventory GUI-k, <code class="k">PagedMenu</code>, Confirm, Anvil/Chat input, <b>yaml-ból definiálható menük</b> a <code class="k">GuiLoader</code>-rel.</p>
-    </div>
-    <div class="tile glass reveal">
-      <h3>💬 Chat Engine <span class="tag ok">kész</span></h3>
-      <p>Csatornák, formázás, hover/click a neveken, local chat, staff csatorna, <b>chat.yml sablon</b> + slow-mode.</p>
-    </div>
-    <div class="tile glass reveal">
-      <h3>🎨 Text &amp; Colors <span class="tag ok">kész</span></h3>
-      <p>MiniMessage + legacy + HEX, gradient, title, actionbar, <code class="k">Messages</code> (lang.yml-stílus) és <code class="k">Localization</code>.</p>
-    </div>
-    <div class="tile glass reveal">
-      <h3>✨ Display &amp; Hologram <span class="tag ok">kész</span></h3>
-      <p>TextDisplay/ItemDisplay builder, animációk, hologramok, <b>követő smart-hologram</b>.</p>
-    </div>
-    <div class="tile glass reveal">
-      <h3>⚔️ Combat Visuals <span class="tag new">új</span></h3>
-      <p>Damage popup, critical-felismerés, combo counter — egy <code class="k">CombatVisuals.enable()</code> hívással.</p>
-    </div>
-    <div class="tile glass reveal">
-      <h3>🖥️ HUD Engine <span class="tag new">új</span></h3>
-      <p>Health/Mana/Stamina sávok és progress-widgetek bossbaron, formázható tokenekkel.</p>
-    </div>
-    <div class="tile glass reveal">
-      <h3>🧍 NPC &amp; Dialogue <span class="tag new">új</span></h3>
-      <p>Per-player NPC-k (<code class="k">NpcKit</code>) és időzített beszélgetések chat-válaszokkal (<code class="k">DialogueKit</code>).</p>
-    </div>
-    <div class="tile glass reveal">
-      <h3>🎥 Cinematic <span class="tag new">új</span></h3>
-      <p>Kameraútvonalak smooth easing-gel (cosine), megszakítás támogatás.</p>
-    </div>
-    <div class="tile glass reveal">
-      <h3>🌫️ Fake render <span class="tag new">új</span></h3>
-      <p>Per-player blokkok (<code class="k">FakeBlockKit</code>) és fake mobok (<code class="k">FakeEntityKit</code> — packet-alapú).</p>
-    </div>
-    <div class="tile glass reveal">
-      <h3>⚡ Ability Engine <span class="tag new">új</span></h3>
-      <p>Item-képességek: cooldown, permission, left/right/hit handler, PDC-alapú felismerés.</p>
-    </div>
-    <div class="tile glass reveal">
-      <h3>💠 Particle + Presets <span class="tag ok">kész</span></h3>
-      <p>Circle/sphere/spiral/beam/aura + kész effekt- és GUI-preset-könyvtár.</p>
-    </div>
-    <div class="tile glass reveal">
-      <h3>🍖 Sound &amp; Task <span class="tag ok">kész</span></h3>
-      <p>3D hangok, időzített szekvenciák, <code class="k">Cooldown</code> és <code class="k">Sequence</code> builder.</p>
-    </div>
-  </section>
+    <!-- sidebar (tartalomjegyzék) -->
+    <aside class="sidenav glass">
+      <div class="head">REFERENCIA</div>
+      <a href="#leptet">Első lépések</a>
+      <a href="#menu">Menu &amp; GUI</a>
+      <a href="#chat">Chat Engine</a>
+      <a href="#text">Text, üzenetek, nyelv</a>
+      <a href="#config">Config &amp; Formula</a>
+      <a href="#display">Display &amp; Hologram</a>
+      <a href="#particle">Particle &amp; Presets</a>
+      <a href="#hud">HUD</a>
+      <a href="#sound">Sound, Task, Notifier</a>
+      <a href="#combat">Combat Visuals</a>
+      <a href="#npc">NPC &amp; Dialogue</a>
+      <a href="#ability">Item Ability</a>
+      <a href="#voucher">Voucher</a>
+      <a href="#command">Parancsok</a>
+      <a href="#client">Fake render &amp; Cinematic</a>
+      <a href="#dialog">Dialog (natív)</a>
+      <a href="#adat">Adatbázis &amp; Statisztika</a>
+      <a href="#hooks">Hookok (28+)</a>
+      <a href="#esemeny">Proxy, Folia, Debug</a>
+    </aside>
 
-  <!-- chat -->
-  <section id="chat">
-    <h2 class="sec-title"><span class="ic">💬</span>Chat Engine</h2>
-    <div class="glass tile reveal" style="max-width: 780px;">
-      <p>Csatornák kódból <b>vagy chat.yml-ből</b> — slow-mode, jogosultság, local-range, hover &amp; click:</p>
-      <div class="codebox">
-        <div class="bar">
-          <span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span>
-          <span class="label">chat.yml</span>
-          <button class="copy">másolás</button>
+    <!-- tartalom -->
+    <div class="doc">
+
+      <!-- ELSŐ LÉPÉSEK -->
+      <section class="docblock glass" id="leptet">
+        <h2 class="doc-head"><span class="ic">🚀</span>Első lépések</h2>
+        <p class="lead">
+          A <b>KitPlugin</b> a javasolt belÃ©pÃ©si osztÃ¡ly: az onEnable-ben elvÃ©gzi az API
+          minden alap-rÃ©szletÃ©t (Kit.init, config.yml, listener-regisztrÃ¡ciÃ³),
+          onDisable-ben pedig a rendezett leÃ¡llÃ­tÃ¡st. OpcionÃ¡lis: sima JavaPlugin + Kit.init.
+          automatikus mentés).
+        </p>
+
+        <h3 class="sub">pom.xml (Maven)</h3>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">pom.xml</span><button class="copy">másolás</button></div>
+          <pre>&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;jitpack&lt;/id&gt;
+        &lt;url&gt;https://jitpack.io&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;                      <span class="cm">&lt;!-- Paper API (26.3) --&gt;</span>
+        &lt;groupId&gt;io.papermc.paper&lt;/groupId&gt;
+        &lt;artifactId&gt;paper-api&lt;/artifactId&gt;
+        &lt;version&gt;26.3.1&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;                      <span class="cm">&lt;!-- KyloAPI --&gt;</span>
+        &lt;groupId&gt;com.github.KyloPvP&lt;/groupId&gt;
+        &lt;artifactId&gt;kyloapi&lt;/artifactId&gt;
+        &lt;version&gt;main-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</pre>
         </div>
-        <pre>default: global
+
+        <h3 class="sub">plugin.yml</h3>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">plugin.yml</span><button class="copy">másolás</button></div>
+          <pre>name: SajatPlugin
+version: 1.0.0
+main: hu.sajatplugin.SajatPlugin
+depend: [kyloapi]</pre>
+        </div>
+
+        <h3 class="sub">A plugin</h3>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">SajatPlugin.java</span><button class="copy">másolás</button></div>
+          <pre><span class="kw">public final class</span> <span class="ty">SajatPlugin</span> <span class="kw">extends</span> <span class="ty">KitPlugin</span> {
+
+    <span class="an">@Override</span>
+    <span class="kw">protected void</span> onBoot() {
+        <span class="ty">CombatVisuals</span>.enable(<span class="kw">this</span>);   <span class="cm">// damage popup + combo</span>
+        <span class="ty">ChatEngine</span>.start(<span class="kw">this</span>);        <span class="cm">// chat csatornák</span>
+        <span class="ty">NpcKit</span>.register(<span class="kw">this</span>);         <span class="cm">// NPC rendszer</span>
+    }
+}</pre>
+        </div>
+
+        <p class="note">
+          A <b>KitPlugin</b> az onDisable-ben automatikusan megteszi:
+          <b>ChatEngine.cleanup()</b>, <b>PacketEventsHook.terminate()</b>,
+          <b>ConfigFile.saveAllRegistered()</b> és a <b>Kit.shutdown()</b>.
+          Kezi plugin esetén ezeket az <code>hu.paperkit.core.Kit</code> osztály
+          hívásai végzik el: <code>Kit.init(plugin)</code> / <code>Kit.shutdown()</code>.
+        </p>
+      </section>
+
+      <!-- MENU -->
+      <section class="docblock glass" id="menu">
+        <h2 class="doc-head"><span class="ic">🖥️</span>Menu &amp; GUI</h2>
+        <p class="lead">
+          Kódolva (Menu), lapozással (PagedMenu), Igen/Nem ablak (ConfirmMenu),
+          anvil- és chat-alapú szövegbevitel (AnvilInputMenu, ChatInput),
+          valamint <b>yaml-ból definiálható menük</b> (GuiLoader).
+        </p>
+
+        <h3 class="sub">Menu</h3>
+        <ul class="api">
+          <li><span class="ret">Menu</span> <b>Menu.create</b>(<span class="dim">rows</span>) <span class="dim">// 1–6 sor</span></li>
+          <li><span class="ret">Menu</span> <b>Menu.create</b>(<span class="dim">rows, title</span>)</li>
+          <li><span class="ret">Menu</span> <b>.at</b>(slot, <span class="ret">MenuButton</span>) &nbsp; <b>.at</b>(row, col, button)</li>
+          <li><span class="ret">Menu</span> <b>.border</b>(button) &nbsp; <b>.fill</b>(button) &nbsp; <b>.range</b>(from, to, button)</li>
+          <li><span class="ret">Menu</span> <b>.title</b>(title) &nbsp; <b>.cancelClicks</b>(bool)</li>
+          <li><b>.open</b>(viewer) &nbsp; <b>.inventory</b>()</li>
+        </ul>
+
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">Példa — bolt menü</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">Menu</span> menu = <span class="ty">Menu</span>.create(3, <span class="st">"&lt;dark_aqua&gt;Bolt"</span>)
+        .border(<span class="ty">MenuButton</span>.display(
+            <span class="ty">ItemBuilder</span>.of(<span class="ty">Material</span>.GRAY_STAINED_GLASS_PANE)
+                    .name(<span class="st">" "</span>).build()))
+        .at(13, <span class="ty">MenuButton</span>.of(
+            <span class="ty">ItemBuilder</span>.of(<span class="ty">Material</span>.EMERALD)
+                    .name(<span class="st">"&lt;green&gt;Vásárlás"</span>)
+                    .glow().build())
+            .click(event -&gt; {
+                <span class="ty">Player</span> p = (<span class="ty">Player</span>) event.getWhoClicked();
+                p.sendMessage(<span class="st">"Vásárlás!"</span>);
+            }));
+menu.open(player);</pre>
+        </div>
+
+        <h3 class="sub">Bookmark bevitel</h3>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">chat-bevitel</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">ChatInput</span>.request(player, <span class="st">"&lt;gold&gt;Írd le, mit vársz!"</span>, szoveg -&gt; {
+    player.sendMessage(<span class="st">"Beírtad: "</span> + szoveg);
+});
+
+<span class="ty">ChatInput</span>.number(player, <span class="st">"&lt;gold&gt;Egy számot!"</span>, szam -&gt; {
+    player.sendMessage(<span class="st">"+" </span> + szam); <span class="cm">// Integer</span>
+});</pre>
+        </div>
+
+        <h3 class="sub">Yaml menü (GuiLoader)</h3>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">guis.yml + Java</span><button class="copy">másolás</button></div>
+          <pre><span class="cm"># guis.yml (plugin adatmappájában)</span>
+main:
+  rows: 3
+  title: "Bolt"
+  fill: { material: GRAY_STAINED_GLASS_PANE, name: " " }
+  items:
+    shop:
+      slot: 11
+      material: EMERALD
+      name: "&lt;green&gt;Vásárlás"
+      actions: [ "[SOUND] ui.button.click", "[COMMAND] shop" ]
+
+<span class="cm">// megnyitás:</span>
+<span class="ty">GuiLoader</span>.open(<span class="kw">this</span>, <span class="st">"guis.yml"</span>, player, <span class="st">"main"</span>);
+
+<span class="cm">// saját akció: [SAJAT] szöveg</span>
+<span class="ty">GuiLoader</span>.registerAction(<span class="st">"SAJAT"</span>, (p, szoveg) -&gt; { <span class="cm">/* ... */</span> });</pre>
+        </div>
+        <p class="note">
+          Beépített akció-nevek: <b>[CLOSE]</b> (bezárás), <b>[COMMAND]</b> (parancs a játékosként),
+          <b>[CONSOLE]</b> (konzolként), <b>[SOUND]&nbsp;név|hangerő|magasság</b>, <b>[CONNECT]&nbsp;szerver</b>,
+          és bármi másnév — amit a registerAction-ből adunk.
+        </p>
+      </section>
+
+      <!-- CHAT -->
+      <section class="docblock glass" id="chat">
+        <h2 class="doc-head"><span class="ic">💬</span>Chat Engine</h2>
+        <p class="lead">
+          Saját chat-formázás csatornákba szervezve: prefix, hover, kattintás, jogosultság,
+          helyi (rész csatornák szabású) üzenetek, slow-mode — mindez kódból vagy
+          <b>chat.yml-ből</b>.
+        </p>
+        <ul class="api">
+          <li><span class="ret">ChatEngine</span> <b>start</b>(plugin) <span class="dim">// alap "global" csatorna</span></li>
+          <li><b>loadFromConfig</b>(plugin) <span class="dim">// csatornák a chat.yml-ből</span></li>
+          <li><b>registerChannel</b>(<span class="ret">Channel</span>) &nbsp; <b>setDefaultChannel</b>(id)</li>
+          <li><b>setSlowMode</b>(id, seconds) &nbsp; <b>setIntercepting</b>(bool)</li>
+          <li><b>send</b>(player, channelId, message)</li>
+          <li><span class="ret">Channel</span> <b>Channel.global</b>(format) / <b>.create</b>(id, format) / <b>.local</b>(format, blocks)</li>
+          <li><span class="ret">Channel</span> <b>.prefix</b>(mini) <b>.hover</b>(mini) <b>.suggest</b>(cmd) <b>.run</b>(cmd)</li>
+          <li><b>.permission</b>(node) <b>.range</b>(blocks) <b>.nameColor</b>(tag)</li>
+        </ul>
+        <h3 class="sub">Kód példa</h3>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">ChatEngine.java</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">ChatEngine</span>.start(<span class="kw">this</span>);
+
+<span class="ty">ChatEngine</span>.registerChannel(
+    <span class="ty">Channel</span>.global(<span class="st">"&lt;dark_gray&gt;[&lt;aqua&gt;G&lt;dark_gray&gt;] {name}&lt;gray&gt;: &lt;/gray&gt;{message}"</span>)
+           .hover(<span class="st">"&lt;gray&gt;Játékos: &lt;white&gt;{player}"</span>)
+           .suggest(<span class="st">"/msg {player} "</span>));
+
+<span class="ty">ChatEngine</span>.registerChannel(
+    <span class="ty">Channel</span>.create(<span class="st">"staff"</span>, <span class="st">"&lt;dark_red&gt;[STAFF] {name}: {message}"</span>)
+           .permission(<span class="st">"myp.chat.staff"</span>));
+
+<span class="ty">ChatEngine</span>.setSlowMode(<span class="st">"global"</span>, 3);   <span class="cm">// 3 mp várakozás</span></pre>
+        </div>
+        <h3 class="sub">chat.yml-s ban JSON-kimenet</h3>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">chat.yml</span><button class="copy">másolás</button></div>
+          <pre>default: global
 channels:
   global:
     format: "&lt;dark_gray&gt;[&lt;aqua&gt;G&lt;dark_gray&gt;] {name}&lt;gray&gt;: &lt;/gray&gt;{message}"
-    hover: "&lt;gray&gt;Játékos: &lt;white&gt;{player}"
     suggest: "/msg {player} "
+  staff:
+    format: "&lt;dark_red&gt;[STAFF] {name}: {message}"
+    permission: "myp.chat.staff"
+  local:
+    format: "&lt;green&gt;[L] {name}: {message}"
+    range: 30        <span class="cm"># csak 30 blokk</span>
 slow-mode-seconds:
   global: 3</pre>
-      </div>
-    </div>
-  </section>
-
-  <!-- vizual -->
-  <section id="vizual">
-    <h2 class="sec-title"><span class="ic">✨</span>Vizuális réteg</h2>
-    <div class="grid">
-      <div class="glass tile reveal">
-        <h3>Combat popupok</h3>
+        </div>
+        <p class="note">
+          Tokenek: <b>{prefix}</b>, <b>{name}</b> (.hover-el), <b>{player}</b>, <b>{message}</b> —
+          — játékoslap: <b>%placeholder%</b> (a PaperKit/KyloAPI <code>Placeholders</code> estefolyón).
+        </p>
+        <h3 class="sub">Chat-kiegészítők (<span class="badge-mini pro">új</span>)</h3>
+        <ul class="api">
+          <li><b>Text.link</b>(szöveg, url) — kattintható link (auto hover)</li>
+          <li><b>Text.centerize</b> / <b>&lt;center&gt;…&lt;/center&gt;</b> — középre igazítás (pad)</li>
+          <li><b>&lt;rainbow&gt;</b> / <b>&lt;transition:#hex1:#hex2:mp&gt;</b> — minitagspec, mozgó szín</li>
+          <li><b>Text.gradient</b>(szöveg, hex1, hex2…) — gradiens adás paraméter-ből</li>
+          <li><b>Icons.*</b> — vanilla font szimbólumok (⚔ ★ ■ ☠ ❤ ▸ …)</li>
+          <li><span class="ret">Channel</span> <b>.url</b>(link) — név-kattintást linkre viszi</li>
+        </ul>
         <div class="codebox">
-          <div class="bar">
-            <span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span>
-            <span class="label">java</span>
-            <button class="copy">másolás</button>
-          </div>
-          <pre><span class="cm">// popup + crit + combo egy hívással</span>
-<span class="ty">CombatVisuals</span>.enable(<span class="kw">this</span>);</pre>
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">Példák</span><button class="copy">másolás</button></div>
+          <pre><span class="cm">// középre igazított, szivárvány színű szöveg:</span>
+<span class="ty">Text</span>.parse(<span class="st">"&lt;center&gt;&lt;rainbow&gt;Üdv a szerveren!"</span>);
+
+          <span class="ty">Text</span>.parse(<span class="st">"&lt;center&gt;&lt;gradient:#ff5d6c:#5b8cff&gt;Hello!"</span>);
+<span class="ty">Text</span>.parse(<span class="st">"&lt;center&gt;&lt;gradient:#ff5d6c:#5b8cff&gt;Éáééél!"
+
+<span class="cm">// mozgó szín (miniMessage transition):</span>
+<span class="ty">Text</span>.parse(<span class="st">"&lt;transition:#5b8cff:#b48bff:5&gt;Pro szerver"</span>);
+
+<span class="cm">// kattintható link (chatben is):</span>
+<span class="ty">Text</span>.link(<span class="st">"&lt;aqua&gt;KyloAPI web"</span>, <span class="st">"https://kylo.hu"</span>);
+
+<span class="cm">// vanília ikon:</span>
+<span class="ty">Msg</span>.send(player, <span class="ty">Icons</span>.SWORD + <span class="st">" &lt;white&gt;Sok szerencsét!"</span>);</pre>
         </div>
-      </div>
-      <div class="glass tile reveal">
-        <h3>HudBars</h3>
+      </section>
+
+      <!-- TEXT -->
+      <section class="docblock glass" id="text">
+        <h2 class="doc-head"><span class="ic">🎨</span>Text, üzenetek, nyelv</h2>
+        <p class="lead">
+          <b>Text</b>: MiniMessage + legacy (&amp;/§) kódok együtt, HEX színek, gradient, title és actionbar.
+          <b>Msg</b>: ConsoleSender/többjátékos üzenet prefikszel. <b>Messages</b>: lang.yml stílusú
+          üzenetkönyvtár. <b>Localization</b>: játékosnyelv szerinti fájl (messages_hu.yml).
+        </p>
+        <ul class="api">
+          <li><span class="ret">Component</span> <b>Text.parse</b>(mini+legacy, resolvers…)</li>
+          <li><b>Text.title</b>(player, main, sub) &nbsp; <b>Text.actionbar</b>(player, text)</li>
+          <li><b>Text.translate</b>(legacy-eset string) &nbsp; <b>Text.plain</b>(string → plain)</li>
+          <li><b>Msg.send</b>(target, msg) &nbsp; <b>Msg.broadcast</b>(msg) &nbsp; <b>Msg.prefix</b>()</li>
+          <li><span class="ret">Messages</span> <b>Messages.load</b>(plugin, "messages.yml")</li>
+          <li><b>.send</b>(player, path, default, kulcsok…) &nbsp; <b>.broadcast</b>(path, default)</li>
+          <li><span class="ret">Localization</span> <b>Localization.load</b>(plugin, "messages")</li>
+          <li><b>Notification (Notifier)</b>: success / info / warn / announce</li>
+        </ul>
         <div class="codebox">
-          <div class="bar">
-            <span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span>
-            <span class="label">java</span>
-            <button class="copy">másolás</button>
-          </div>
-          <pre><span class="ty">HudBars</span>.bar(player, <span class="st">"hp"</span>,
-    <span class="st">"&lt;red&gt;%bar% %current%/%max%"</span>,
-    <span class="ty">BossBar</span>.<span class="ty">Color</span>.RED)
-    .value(player.getHealth())
-    .max(<span class="kw">20</span>)
-    .push();</pre>
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">Példák</span><button class="copy">másolás</button></div>
+          <pre><span class="cm">// színkonverzió keverve:</span>
+<span class="ty">Text</span>.parse(<span class="st">"&amp;aZőld... na jó: &lt;green&gt;Mini"</span>);
+
+<span class="cm">// mége üzenetek messages.yml-ből</span>
+<span class="ty">Messages</span> msg = <span class="ty">Messages</span>.load(<span class="kw">this</span>, <span class="st">"messages.yml"</span>);
+msg.send(player, <span class="st">"level-up"</span>, <span class="st">"&lt;green&gt;Szintlepes!"</span>, <span class="st">"level"</span>, 5);
+
+<span class="cm">// nyelv a játékos locale-jából (messages_hu.yml)</span>
+<span class="ty">Localization</span> loc = <span class="ty">Localization</span>.load(<span class="kw">this</span>, <span class="st">"messages"</span>);
+loc.send(player, <span class="st">"welcome"</span>, <span class="st">"&lt;green&gt;Üdv!"</span>);
+
+<span class="cm">// konzisztens értesítés:</span>
+<span class="ty">Notifier</span>.success(player, <span class="st">"&lt;green&gt;Mentve."</span>);</pre>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- hooks -->
-  <section id="hooks">
-    <h2 class="sec-title"><span class="ic">🧩</span>Integrációk — 28+ plugin</h2>
-    <div class="glass reveal tablewrap">
-      <table>
-        <thead><tr><th>Hook</th><th>Mit ad</th><th>Státusz</th></tr></thead>
-        <tbody>
-          <tr><td>PacketEvents</td><td>csomag-listenerek, fake blokk/entity</td><td class="tick">●</td></tr>
-          <tr><td>Vault</td><td>pénz (balance/give/take)</td><td class="tick">●</td></tr>
-          <tr><td>LuckPerms</td><td>prefix / suffix / csoport</td><td class="tick">●</td></tr>
-          <tr><td>PlaceholderAPI</td><td>%token% feloldás</td><td class="tick">●</td></tr>
-          <tr><td>WorldGuard</td><td>régió lekérés (<code>inRegion</code>)</td><td class="tick">●</td></tr>
-          <tr><td>GriefPrevention</td><td>claim-tulaj, claim-felismerés</td><td class="tick">●</td></tr>
-          <tr><td>EssentialsX</td><td>egyenleg, nickname</td><td class="tick">●</td></tr>
-          <tr><td>DiscordSRV</td><td>Discord-csatorna üzenet</td><td class="tick">●</td></tr>
-          <tr><td>Citizens / MythicMobs</td><td>NPC / mob felismerés</td><td class="tick">●</td></tr>
-          <tr><td>ViaVersion</td><td>protokollverzió-lekérés</td><td class="tick">●</td></tr>
-          <tr><td>DecentHolograms</td><td>hologram-spawn DH API-val</td><td class="tick">●</td></tr>
-          <tr><td>ItemsAdder / Nexo</td><td>custom item</td><td class="tick">●</td></tr>
-          <tr><td>Geyser / Floodgate</td><td>Bedrock-felismerés</td><td class="tick">●</td></tr>
-          <tr><td>+ ProtocolLib, TAB, spark, Plan, CoreProtect, PlugManX…</td><td>jelenlét + apró segítők</td><td class="tick">●</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- inditas -->
-  <section id="inditas">
-    <h2 class="sec-title"><span class="ic">🚀</span>Kezdés 10 másodperc alatt</h2>
-    <div class="glass tile reveal">
-      <p>1) add a függőséget · 2) <code class="k">extends KitPlugin</code> · 3) használd bátran</p>
-      <div class="codebox">
-        <div class="bar">
-          <span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span>
-          <span class="label">SajatPlugin.java</span>
-          <button class="copy">másolás</button>
+      <!-- CONFIG -->
+      <section class="docblock glass" id="config">
+        <h2 class="doc-head"><span class="ic">🗂️</span>Config &amp; Formula</h2>
+        <p class="lead">
+          <b>ConfigFile</b>: jar-be vett factory, Yaml-olvasás/írás tipusosan, szekciók.
+          <b>Formula</b>: matematikai kifejezés-evaluator a "formula / manual" config-mintához.
+        </p>
+        <ul class="api">
+          <li><span class="ret">ConfigFile</span> <b>ConfigFile.load</b>(plugin, "config.yml")</li>
+          <li><b>getString / getInt / getBoolean / getDouble</b>(path, default)</li>
+          <li><b>.set</b>(path, value) / <b>.save</b>() / <b>.saveIfChanged</b>() / <b>.reload</b>()</li>
+          <li><span class="ret">Section</span> <b>.node</b>(path) &nbsp; <span class="ret">List</span> <b>.keys</b>(path)</li>
+          <li><span class="ret">Formula</span> <b>Formula.compile</b>("2 ^ %level% * 30")</li>
+          <li><b>.evalInt</b>(Map.of("level", szint)) / <b>.eval</b>(vars) admínio</li>
+          <li><span class="ret">int</span> <b>Formula.calculate</b>(config, path, "level", szint)</li>
+        </ul>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">config.yml + Formula</span><button class="copy">másolás</button></div>
+          <pre><span class="cm"># config.yml — a kész pluginók konfig-mintája:</span>
+xp-szukseges:
+  type: "formula"              <span class="cm"># vagy "manual"</span>
+  formula: "%level% ^ 2 * 100"
+  manual:
+    1: "100"
+    2: "500"</pre>
         </div>
-        <pre><span class="kw">public final class</span> <span class="ty">SajatPlugin</span> <span class="kw">extends</span> <span class="ty">KitPlugin</span> {
-    <span class="an">@Override</span>
-    <span class="kw">protected void</span> onBoot() {
-        <span class="ty">CombatVisuals</span>.enable(<span class="kw">this</span>);
-        <span class="ty">ChatEngine</span>.start(<span class="kw">this</span>);
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">Java</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">ConfigFile</span> cfg = <span class="ty">ConfigFile</span>.load(<span class="kw">this</span>, <span class="st">"config.yml"</span>);
+<span class="kw">int</span> szukseges = <span class="ty">Formula</span>.calculate(cfg, <span class="st">"xp-szukseges"</span>, <span class="st">"level"</span>, szint);
+<span class="cm">// vagy:</span>
+<span class="kw">int</span> szinten = <span class="ty">Formula</span>.compile(<span class="st">"/szimulast"</span>).evalInt(<span class="st">"level"</span>, 5);</pre>
+        </div>
+      </section>
 
-        <span class="cm">// az első NPC 3 sorban</span>
-        <span class="ty">NpcKit</span>.spawn(player.getLocation(), <span class="st">"&lt;gold&gt;Mester"</span>);
-    }
+      <!-- DISPLAY -->
+      <section class="docblock glass" id="display">
+        <h2 class="doc-head"><span class="ic">✨</span>Display &amp; Hologram</h2>
+        <p class="lead">
+          TextDisplay/ItemDisplay-entityek builderrel; <b>DisplayAnimation</b> láncolható
+          (skálázás, mozgas elforgatás, ismétlés); <b>Hologram</b> több soros szöveg_lebegő;
+          <b>SmartHologram</b> — entity mögé „ragadt” lebegő feliratok.
+        </p>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">TextDisplay + Animation + Hologram</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">TextDisplay</span> text = <span class="ty">TextDisplayBuilder</span>.at(loc)
+        .text(<span class="st">"&lt;gold&gt;Hello!"</span>)
+        .billboard(<span class="ty">Display</span>.<span class="ty">Billboard</span>.CENTER)
+        .seeThrough().glow()
+        .scale(1.4f)
+        .spawn();
+
+<span class="ka">hu.paperkit.display.</span><span class="ty">DisplayAnimation</span>.looping(text)
+        .translate(0f, .4f, 0f, 40)
+        .reset(20)
+        .play();
+
+<span class="ty">Hologram</span> holo = <span class="ty">Hologram</span>.create(loc,
+        <span class="st">"&lt;gold&gt;Üdv!"</span>, <span class="st">"&lt;gray&gt;Soronként..."</span>).spawn();
+holo.setLine(1, <span class="st">"&lt;white&gt; új szöveg"</span>);</pre>
+        </div>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">SmartHologram — követés fej fölött</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">SmartHologram</span> hud = <span class="ty">SmartHologram</span>.create(loc, <span class="st">"&lt;gold&gt;Vedőnök"</span>);
+hud.follow(player, 2.4).bob(0.05); <span class="cm">// +2.4 blokk, lassan lebeg</span>
+hud.remove();                       <span class="cm">// torlés, ha a taskot befejeztük</span></pre>
+        </div>
+      </section>
+
+      <!-- PARTICLE -->
+      <section class="docblock glass" id="particle">
+        <h2 class="doc-head"><span class="ic">💠</span>Particle &amp; Presets</h2>
+        <p class="lead">
+          <b>ParticleBuilder</b>: darabszám, offset, nézők, csendes force-mentes spawn.
+          <b>ParticleTask</b>: ciklikusan ismétlődő (ciklusszám-limitált) animácó.
+          <b>ParticleEffects</b>: beam, trail, burst segéd.
+          <b>Presets</b>: kész effekt-könyvtár.
+        </p>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">particle példák</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">ParticleEffects</span>.builder(<span class="ty">Particle</span>.FLAME, loc)
+        .count(24).offset(.3, .2, .3)
+        .viewers(nearby).spawn();
+
+<span class="ty">ParticleTask</span>.every(2).limit(30)
+        .cycleTick(cycle -&gt; { <span class="cm">/* ciklusszáma "{0}" */</span> })
+        .play();
+
+<span class="cm">// kész impdocumentats:</span>
+<span class="ty">Presets</span>.explosionRing(loc).play();     <span class="cm">// táguló gyűrű</span>
+<span class="ty">Presets</span>.teleportSpiral(loc).play();    <span class="cm">// emelkedő spirál</span>
+<span class="ty">Presets</span>.shieldDome(loc, 30).play();    <span class="cm">// védődome</span>
+<span class="ty">Presets</span>.levelUpAura(loc, 40).play();   <span class="cm">// szintlépés aura</span></pre>
+        </div>
+      </section>
+
+      <!-- HUD -->
+      <section class="docblock glass" id="hud">
+        <h2 class="doc-head"><span class="ic">🖥️</span>HUD</h2>
+        <p class="lead">
+          Boss-bar (BossBarKit), tab-lista (TabKit), scoreboard (ScoreboardKit) és
+          widget-sávok (HudBars) — az mindegyik per-player.
+        </p>
+        <ul class="api">
+          <li><span class="ret">BossBarKit</span> <b>BossBarKit.create</b>(title, color, progress)</li>
+          <li><b>.showTo</b>(player) / <b>.broadcast</b>() / <b>.hide</b>(player) / <b>.delete</b>()</li>
+          <li><b>.title</b>(mini) / <b>.color</b>(BossBar.Color) / <b>.progress</b>(float)</li>
+          <li><b>TabKit.send</b>(player, header, footer) / <b>TabKit.sendAll</b>(…)</li>
+          <li><span class="ret">ScoreboardKit</span> <b>ScoreboardKit.create</b>(title) / <b>.lines</b>(…) / <b>.show</b>(player)</li>
+          <li><span class="ret">HudBars.Bar</span> <b>HudBars.bar</b>(player, "hp", format, color)</li>
+          <li><b>.value</b>(x) / <b>.max</b>(n) / <b>.format</b>(fmt) / <b>.push</b>() / <b>HudBars.clear</b>(player)</li>
+        </ul>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">HP + Mana</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">HudBars</span>.bar(player, <span class="st">"hp"</span>, <span class="st">"&lt;red&gt;%bar% %current%/%max%"</span>, <span class="ty">BossBar</span>.<span class="ty">Color</span>.RED)
+      .value(player.getHealth()).max(<span class="kw">20</span>).push();
+
+<span class="ty">HudBars</span>.bar(player, <span class="st">"mana"</span>, <span class="st">"&lt;aqua&gt;Mana: %value%"</span>, <span class="ty">BossBar</span>.<span class="ty">Color</span>.BLUE)
+      .value(<span class="kw">45</span>).max(<span class="kw">100</span>).push();</pre>
+        </div>
+      </section>
+
+      <!-- SOUND / TASK -->
+      <section class="docblock glass" id="sound">
+        <h2 class="doc-head"><span class="ic">🔊</span>Sound, Task, Notifier</h2>
+        <p class="lead">
+          <b>SoundKit</b>: helyi hangok és hangszekvenciák. <b>TaskKit</b>: saját renderink szemelyesváitaszalág.
+          <b>Cooldown</b>: játékos-alapú cooldown-kezelés (UUID + kulcs).
+          <b>Sequence</b>: időzített lépések láncolva.
+        </p>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">Hangok</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">SoundKit</span>.playerPlay(player, <span class="ty">Sound</span>.ENTITY_PLAYER_LEVELUP, 1f, 1.2f);
+
+<span class="ty">SoundKit</span>.sequence(player)
+        .push(<span class="ty">Sound</span>.BLOCK_NOTE_BLOCK_PLING, 1f, 1f)
+        .at(3, <span class="ty">Sound</span>.BLOCK_NOTE_BLOCK_BELL, 1f, 1.3f)
+        .start();</pre>
+        </div>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">Task + Cooldown + Sequence</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">TaskKit</span>.repeat(<span class="kw">10</span>, cycle -&gt; { <span class="cm">/* 10 tickenként */</span> })
+       .limit(<span class="kw">5</span>).start();
+
+<span class="ty">Cooldown</span> cd = <span class="kw">new</span> <span class="ty">Cooldown</span>();
+cd.set(player, <span class="st">"omorphic_ability"</span>, 60000);       <span class="cm">// 60mp</span>
+cd.isOnCooldown(player, <span class="st">"morph_ability"</span>);        <span class="cm">// true</span>
+
+<span class="ty">Sequence</span>.create().pause(<span class="kw">20</span>)
+        .then(() -&gt; <span class="cm">/* 1s utan */</span> { })
+        .pause(<span class="kw">20</span>).then(() -&gt; { <span class="cm">/* ehő să central */</span> })
+        .start();</pre>
+        </div>
+      </section>
+
+      <!-- COMBAT -->
+      <section class="docblock glass" id="combat">
+        <h2 class="doc-head"><span class="ic">⚔️</span>Combat Visuals</h2>
+        <p class="lead">
+          Egy hívással aktiválódik: árnyalásos <b>damage popup</b> elsütött támadásnál,
+          <b>kritikus találat</b>-szín, <b>combo-számláló</b> (actionbar) az egymás utáni találatokból.
+        </p>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">CombatVisuals.java</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">CombatVisuals</span>.enable(<span class="kw">this</span>);  <span class="cm">// popup + crit + combo ON</span>
+
+<span class="cm">// forma konfigurálásában:</span>
+<span class="ty">CombatVisuals</span>.popupFormat(<span class="st">"&lt;red&gt;&lt;bold&gt;%amount%"</span>);
+<span class="ty">CombatVisuals</span>.critFormat(<span class="st">"&lt;gold&gt;&lt;bold&gt;%amount%"</span>);
+<span class="ty">CombatVisuals</span>.comboFormat(<span class="st">"&lt;yellow&gt;%count%&lt;gray&gt;x combo!"</span>);
+<span class="ty">CombatVisuals</span>.comboWindow(<span class="kw">3000</span>);  <span class="cm">// ms</span>
+
+<span class="cm">// kézi használat (bármikor):</span>
+<span class="ty">CombatVisuals</span>.showDamage(loc, <span class="kw">12.5</span>, <span class="kw">true</span>);
+<span class="ty">CombatVisuals</span>.showText(loc, <span class="st">"&lt;gold&gt;SZINTLEPÉS!"</span>);</pre>
+        </div>
+      </section>
+
+      <!-- NPC -->
+      <section class="docblock glass" id="npc">
+        <h2 class="doc-head"><span class="ic">🧍</span>NPC &amp; Dialogue</h2>
+        <p class="lead">
+          <b>NpcKit</b>: per-player NPC — a viewer úgy lát egy mobot/armor-standot,
+          amit a többi játékos nem. <b>DialogueKit</b>: időzített beszélgetések
+          chat-válaszgal (igen/nem típusú bemelegek).
+        </p>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">NPC + dialógus</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">NpcKit</span>.register(<span class="kw">this</span>);            <span class="cm">// onBoot-ban, egyszer</span>
+
+<span class="ty">var</span> mester = <span class="ty">NpcKit</span>.spawn(loc, <span class="st">"&lt;gold&gt;Mester"</span>);
+mester.visibleTo(player)
+      .dialogue(<span class="st">"Szia utazó!"</span>, <span class="st">"Miben segíthetek?"</span>)
+      .onClick(p -&gt; mester.playDialogueTo(p));
+
+<span class="cm">// beszélgetés chat-válaszgal:</span>
+<span class="ty">DialogueKit</span>.speak(player)
+        .line(<span class="st">"&lt;gold&gt;Mester: &lt;white&gt;Szia!"</span>)
+        .line(<span class="st">"&lt;gold&gt;Mester: &lt;white&gt;Jól vagy?"</span>)
+        .ask(<span class="st">"&lt;aqua&gt;Ird be: igen / nem"</span>, valasz -&gt; {
+            <span class="kw">if</span> (valasz.equalsIgnoreCase(<span class="st">"igen"</span>)) { <span class="cm">/* ... */</span> }
+        })
+        .start(<span class="kw">40</span>);   <span class="cm">// 40 tick a sorok között</span></pre>
+        </div>
+      </section>
+
+      <!-- ABILITY -->
+      <section class="docblock glass" id="ability">
+        <h2 class="doc-head"><span class="ic">⚡</span>Item Ability Engine</h2>
+        <p class="lead">
+          Egyedi képességek vanilla itemekre: a képességet PDC-címkézzük az itemre,
+          a kezelés (klikk / támadás) architectures t egy <b>cooldown</b>-al és permission-nel jog.
+        </p>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">Villám-vessző</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">AbilityKit</span>.register(<span class="kw">this</span>);
+
+<span class="ty">var</span> villam = <span class="ty">AbilityKit</span>.build(<span class="st">"lightning-wand"</span>)
+        .cooldownMillis(<span class="kw">2000</span>)
+        .permission(<span class="st">"myp.wand"</span>)
+        .onCooldownMessage(<span class="st">"&lt;red&gt;Várj: &lt;white&gt;%seconds%s"</span>)
+        .onRightClick(event -&gt; {
+            <span class="cm">// villlamos animation:</span>
+            <span class="ty">Presets</span>.explosionRing(event.getPlayer().getLocation()).play();
+        })
+        .onHitEntity(event -&gt; { <span class="cm">/* entity ütés-reagálás */</span> })
+        .register();
+
+<span class="kw">var</span> item = villam.stamp(
+    <span class="ty">ItemBuilder</span>.of(<span class="ty">Material</span>.STICK).name(<span class="st">"&lt;green&gt;Villám-vessző"</span>).build());</pre>
+        </div>
+      </section>
+
+      <!-- COMMAND -->
+      <section class="docblock glass" id="command">
+        <h2 class="doc-head"><span class="ic">🧭</span>Parancsok (CommandKit)</h2>
+        <p class="lead">
+          Sub-parancs router: permission, alias, playerOnly, tab-completion,
+          argumentum-olvasás — mindegyik Security-a Biztonság Bell-mett —, plugin.yml gondtal.
+        </p>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">Router</span><button class="copy">másolás</button></div>
+          <pre><span class="cm">// plugin.yml-ben: "shop" parancs definialva</span>
+<span class="ty">CommandKit</span>.route(<span class="kw">this</span>, <span class="st">"shop"</span>, root -&gt; {
+
+    root.sub(<span class="st">"give"</span>)
+        .permission(<span class="st">"shop.give"</span>)
+        .playerOnly()
+        .minArgs(<span class="kw">2</span>)
+        .usage(<span class="st">"&lt;jatekos&gt; &lt;osszeg&gt;"</span>)
+        .on(ctx -&gt; {
+            <span class="ty">Player</span> celpont = ctx.argPlayer(<span class="kw">0</span>);
+            <span class="kw">int</span> osszeg = ctx.argInt(<span class="kw">1</span>, 0);
+            <span class="cm">// give logika...</span>
+        })
+        .tab(<span class="kw">0</span>, input -&gt; <span class="ty">List</span>.of(<span class="st">"KyloPvP"</span>, <span class="st">"Jatekos2"</span>));
+
+    root.sub(<span class="st">"reload"</span>)
+        .permission(<span class="st">"shop.reload"</span>)
+        .on(ctx -&gt; cfg.reload());
+});</pre>
+        </div>
+        <p class="note">
+          <b>CommandContext</b>: <code>sender()</code>, <code>player()</code>,
+          <code>arg(i, default)</code>, <code>argInt(i, default)</code>,
+          <code>argPlayer(i)</code>, <code>argCount()</code>.
+        </p>
+      </section>
+
+      <!-- CLIENT -->
+      <section class="docblock glass" id="client">
+        <h2 class="doc-head"><span class="ic">🌫️</span>Fake render &amp; Cinematic</h2>
+        <p class="lead">
+          <b>FakeBlockKit</b> natívan (PacketEvents nélkül) — csak a megadott játékos látja a blokkot.
+          <b>FakeEntityKit</b> packet-alapú (ehhez PacketEvents kell).
+          <b>CinematicKit</b>: sima kamera-út pontos pontok közt, leállítható.
+        </p>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">Fake blokk + fake mob + kamera</span><button class="copy">másolás</button></div>
+          <pre><span class="cm">//_csak az émelyg Consté latja:</span>
+<span class="ty">FakeBlockKit</span>.set(player, loc, <span class="ty">Material</span>.GLOWSTONE);
+<span class="ty">FakeBlockKit</span>.reset(player, loc);
+<span class="ty">FakeBlockKit</span>.clear(player);
+
+<span class="cm">// fake mob (ehhez PacketEvents kell):</span>
+<span class="ty">var</span> fakeMob = <span class="ty">FakeEntityKit</span>.spawn(player, loc, <span class="st">"zombie"</span>);
+fakeMob.teleport(masikLoc);
+fakeMob.remove();
+
+<span class="cm">// kamera-út:</span>
+<span class="ty">CinematicKit</span>.play(<span class="kw">this</span>, player, <span class="ty">List</span>.of(p1, p2, p3), <span class="kw">100</span>,
+        () -&gt; { <span class="cm">// kész</span> });
+<span class="ty">CinematicKit</span>.cancel(player);</pre>
+        </div>
+      </section>
+
+      <!-- HOOKS -->
+      <section class="docblock glass" id="hooks">
+        <h2 class="doc-head"><span class="ic">🧩</span>Integrációk (28+ plugin) <span class="badge-mini core">reflexió</span></h2>
+        <p class="lead">
+          Mindegyik hook <b>futásidőben</b> kötődik (reflexióval), így hordozható a jar akár
+          mindenhol — fennvalóság ellenőrzés a <code>Hooks.isPluginEnabled("Név")</code>.
+        </p>
+
+        <h3 class="sub">Központi (hu.paperkit.hooks.*)</h3>
+        <ul class="api">
+          <li><b>Hooks</b>.isPluginEnabled(name) / getPlugin(name) / version(name)</li>
+          <li><b>PacketEventsHook</b>.engage(plugin) / addReceiveListener / addSendListener</li>
+          <li><b>PacketEventsHook</b>.sendBlockChange(player, loc, blockState) / terminate()</li>
+          <li><b>VaultHook</b>.hooked() / balance(p) / has(p, amt) / give(p, amt) / take(p, amt)</li>
+          <li><b>LuckPermsHook</b>.hooked() / prefix(uuid) / suffix(uuid) / primaryGroup(uuid)</li>
+          <li><b>PapiHook</b>.hooked() / apply(player, text)</li>
+        </ul>
+
+        <h3 class="sub">A teljes integrációs lista</h3>
+        <div class="glass reveal tablewrap">
+          <table>
+            <thead><tr><th>Hook</th><th>Osztály</th><th>Mit ad</th></tr></thead>
+            <tbody>
+              <tr><td>PacketEvents</td><td>hooks.packetevents.PacketEventsHook</td><td>csomag-listenerek, fake blokk/entity</td></tr>
+              <tr><td>Vault</td><td>hooks.vault.VaultHook</td><td>pénzsbor (balance/give/take/has)</td></tr>
+              <tr><td>LuckPerms</td><td>hooks.luckperms.LuckPermsHook</td><td>prefix / suffix / csoport</td></tr>
+              <tr><td>PlaceholderAPI</td><td>hooks.papi.PapiHook</td><td>%token%-ek feloldása</td></tr>
+              <tr><td>WorldGuard</td><td>integrations.ProtectionHooks.WorldGuardHook</td><td>régió-id lekérés, inRegion()</td></tr>
+              <tr><td>WorldEdit</td><td>integrations.ProtectionHooks.WorldEditHook</td><td>jelenlét</td></tr>
+              <tr><td>GriefPrevention</td><td>integrations.ProtectionHooks.GriefPreventionHook</td><td>claim-felismerés, tulaj</td></tr>
+              <tr><td>LiteBans</td><td>integrations.ProtectionHooks.LiteBansHook</td><td>ban-ellenőrzés</td></tr>
+              <tr><td>EssentialsX</td><td>integrations.CommunityHooks.EssentialsHook</td><td>egyenleg, nickname</td></tr>
+              <tr><td>Multiverse-Core</td><td>integrations.CommunityHooks.MultiverseHook</td><td>menedzselt világ felismerés</td></tr>
+              <tr><td>DiscordSRV</td><td>integrations.CommunityHooks.DiscordSRVHook</td><td>Discord-csatorna üzenet</td></tr>
+              <tr><td>SuperVanish / PremiumVanish</td><td>integrations.CommunityHooks.SuperVanishHook</td><td>eltűnés-állapot</td></tr>
+              <tr><td>SkinsRestorer</td><td>integrations.CommunityHooks.SkinsRestorerHook</td><td>jelenlét</td></tr>
+              <tr><td>ViaVersion</td><td>integrations.ServerHooks.ViaVersionHook</td><td>protokollverzió-lekérés</td></tr>
+              <tr><td>PlugManX</td><td>integrations.ServerHooks.PlugManHook</td><td>plugin enable/disable</td></tr>
+              <tr><td>ProtocolLib / TAB</td><td>integrations.ServerHooks.*Hook</td><td>jelenlét</td></tr>
+              <tr><td>spark / Plan / CoreProtect</td><td>integrations.ServerHooks.*Hook</td><td>jelenlét</td></tr>
+              <tr><td>Citizens</td><td>integrations.ContentHooks.CitizensHook</td><td>NPC-felismerés</td></tr>
+              <tr><td>MythicMobs</td><td>integrations.ContentHooks.MythicMobsHook</td><td>mob-felismerés</td></tr>
+              <tr><td>DecentHolograms</td><td>integrations.ContentHooks.DecentHologramsHook</td><td>hologram-spawn DH API-val</td></tr>
+              <tr><td>ItemsAdder / Nexo</td><td>integrations.ContentHooks.ItemsAdderHook/NexoHook</td><td>custom item</td></tr>
+              <tr><td>Geyser / Floodgate</td><td>integrations.ContentHooks.GeyserHook</td><td>Bedrock-felismerés</td></tr>
+              <tr><td>ModelEngine</td><td>integrations.ContentHooks.ModelEngineHook</td><td>jelenlét</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">használat</span><button class="copy">másolás</button></div>
+          <pre><span class="kw">if</span> (<span class="ty">Hooks</span>.isPluginEnabled(<span class="st">"packetevents"</span>)) {
+    <span class="ty">PacketEventsHook</span>.engage(<span class="kw">this</span>);
+}
+
+<span class="kw">if</span> (<span class="ty">ProtectionHooks</span>.<span class="ty">WorldGuardHook</span>.inRegion(loc, <span class="st">"kobanya"</span>)) { <span class="cm">/**/</span> }
+<span class="kw">if</span> (<span class="ty">ContentHooks</span>.<span class="ty">GeyserHook</span>.isBedrock(player)) { <span class="cm">/**/</span> }
+
+<span class="kw">if</span> (<span class="ty">VaultHook</span>.hooked()) {
+    <span class="ty">VaultHook</span>.give(player, <span class="kw">100.0</span>);
 }</pre>
-      </div>
+        </div>
+      </section>
+
+      <!-- VOUCHER -->
+      <section class="docblock glass" id="voucher">
+        <h2 class="doc-head"><span class="ic">🎟️</span>Voucher Engine <span class="badge-mini pro">új</span></h2>
+        <p class="lead">
+          Vásárlásra/küldésre használható <b>kupon-itemek</b>: jobb-klikkre meghívott saját
+          kód, PDC-alapú felismerés, esiledle (még ablak), cooldown és mennyivéret
+          methódus átadás. Egy <code class="k">.stamp()</code> hívással bármelyik item lesz voucher.
+        </p>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">Példa — pénzkupon</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">VoucherKit</span>.register(<span class="kw">this</span>);
+
+<span class="kw">var</span> kupon = <span class="ty">VoucherKit</span>.voucher(<span class="st">"money-500"</span>)
+        .onRedeem((player, item) -&gt; {
+            <span class="ty">VaultHook</span>.give(player, <span class="kw">500</span>);   <span class="cm">// vagy saját logika</span>
+        })
+        .consumeItem(<span class="kw">true</span>)          <span class="cm">// az item elhasználódjon</span>
+        .successMessage(<span class="st">"&lt;green&gt;500 $ jóváírva!"</span>)
+        .register();
+
+<span class="cm">// az item elkészítése és odaadása:</span>
+<span class="kw">var</span> item = kupon.stamp(
+    <span class="ty">ItemBuilder</span>.of(<span class="ty">Material</span>.PAPER)
+            .name(<span class="st">"&lt;gold&gt;500 $ kupon"</span>)
+            .lore(<span class="st">"&lt;gray&gt;Kattints a beváltáshoz!"</span>)
+            .build());
+player.getInventory().addItem(item);</pre>
+        </div>
+        <p class="note">
+          Egyébответ: canRedeem((player,item) -> logikai feltétel),
+          canRedeemMessage, cooldownMillis, consumeItem(false) a többször
+          has单车 voucher-hez.
+        </p>
+      </section>
+
+      <!-- DIALOG -->
+      <section class="docblock glass" id="dialog">
+        <h2 class="doc-head"><span class="ic">🪄</span>Dialog (natív GUI-ablak) <span class="badge-mini pro">új</span></h2>
+        <p class="lead">
+          A Paper 1.21.7+ <b>natív Dialog API</b>-ja: valódi in-game ablak:
+          figyelmeztető és megerősítő ablak, es képi-op lánc button menu —
+          cur	Command, link vagy Java-callback gombokkal.
+        </p>
+        <ul class="api">
+          <li><span class="ret">void</span> <b>DialogKit.notice</b>(player, title, body)</li>
+          <li><b>.confirm</b>(player, title, body, onYes, onNo)</li>
+          <li><b>.menu</b>(player, title, body, columns, options…)</li>
+          <li><span class="ret">DialogOption</span> <b>option</b>(label, action) / <b>option</b>(label, tooltip, action, command, url)</li>
+        </ul>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">Példák</span><button class="copy">másolás</button></div>
+          <pre><span class="cm">// figyelmeztető ablak</span>
+<span class="ty">DialogKit</span>.notice(player, <span class="st">"&lt;gold&gt;Figyelmeztetés"</span>, <span class="st">"Kérlek, ezt szeretnéd?"</span>);
+
+<span class="cm">// Igen/Nem megerősítés</span>
+<span class="ty">DialogKit</span>.confirm(player, <span class="st">"&lt;red&gt;Biztos?"</span>, <span class="st">"Ez visszavonhatatlan."</span>,
+        () -&gt; { <span class="cm">/* igen */</span> }, () -&gt; { <span class="cm">/* nem */</span> });
+
+<span class="cm">// Menü: gombok callback / parancs / link</span>
+<span class="ty">DialogKit</span>.menu(player, <span class="st">"&lt;aqua&gt;Válassz!"</span>, <span class="kw">null</span>, <span class="kw">2</span>,
+    <span class="ty">DialogKit</span>.option(<span class="st">"&lt;green&gt;Weboldal"</span>, <span class="kw">null</span>/<span class="st">"kylo.hu"</span>) <span class="cm">// lejjebb: full változat</span>,
+    <span class="ty">DialogKit</span>.option(<span class="st">"&lt;yellow&gt;Kit gui"</span>, <span class="kw">null</span>, <span class="kw">null</span>, <span class="st">"kit"</span>, <span class="kw">null</span>));</pre>
+        </div>
+      </section>
+
+      <!-- ADATBAZIS -->
+      <section class="docblock glass" id="adat">
+        <h2 class="doc-head"><span class="ic">🗄️</span>Adatbázis &amp; Statisztika <span class="badge-mini pro">új</span></h2>
+        <p class="lead">
+          <b>DatabaseKit</b>: SQLite (a server tartalmazza a drivert) és MySQL —
+          paraméterezett query/update, minden szálbiztos.
+          <b>StatKit</b>: tetszőleges statisztika per-játékos (cache + async mentés + leaderboard).
+        </p>
+        <ul class="api">
+          <li><span class="ret">DatabaseKit</span> <b>DatabaseKit.open</b>(plugin, "adatok.db") — SQLite</li>
+          <li><b>DatabaseKit.open</b>("jdbc:mysql://host/db", user, pass) — MySQL</li>
+          <li><b>.table</b>(name, "uuid TEXT", "value REAL"…) / <b>.update</b>(sql, params…)</li>
+          <li><b>.query</b>(sql, params…) → <span class="ret">List&lt;Map&gt;</span> / <b>.firstValue</b>(sql, col, params…)</li>
+          <li><span class="ret">StatKit</span> <b>StatKit.open</b>(plugin, db) / <b>add</b>(player, key, amount)</li>
+          <li><b>.set</b>(player, key, value) / <b>.get</b>(player, key)</li>
+          <li><b>.top</b>(key, limit) → <span class="ret">List&lt;Entry&gt;</span> / <b>sendTop</b>(viewer, key, limit)</li>
+          <li><b>.flush</b>() / <b>.autoFlush</b>(seconds) / <b>.close</b>()</li>
+        </ul>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">Példák</span><button class="copy">másolás</button></div>
+          <pre><span class="kw">var</span> db = <span class="ty">DatabaseKit</span>.open(<span class="kw">this</span>, <span class="st">"kylo.db"</span>);
+db.table(<span class="st">"vyelendusers"</span>, <span class="st">"uuid TEXT"</span>, <span class="st">"name TEXT"</span>, <span class="st">"money REAL"</span>);
+db.update(<span class="st">"INSERT INTO vyelendusers VALUES (?, ?, ?)"</span>,
+        player.getUniqueId(), player.getName(), <span class="kw">0.0</span>);
+
+<span class="ty">StatKit</span>.open(<span class="kw">this</span>, db);
+<span class="ty">StatKit</span>.add(player, <span class="st">"kills"</span>, <span class="kw">1</span>);
+<span class="ty">StatisticKit</span>.sendTop(viewer, <span class="st">"kills"</span>, <span class="kw">10</span>);
+<span class="ty">StatKit</span>.autoFlush(<span class="kw">60</span>);    <span class="cm">// percenkénti mentés</span></pre>
+        </div>
+      </section>
+
+      <!-- EGYÉB -->
+      <section class="docblock glass" id="esemeny">
+        <h2 class="doc-head"><span class="ic">🛠️</span>Proxy, Folia, Debug, Inventories</h2>
+        <ul class="api">
+          <li><b>ProxyKit</b>.register(plugin) / connect(player, "lobby") / serverCount(player)</li>
+          <li><b>ResourcePackKit</b>.send(player, url, sha1)</li>
+          <li><b>Compat</b>.isFolia() / serverVersion() / atEntity(e, task) / global(task) / async(task)</li>
+          <li><b>DebugKit</b>.time("label", runnable) / tpsMonitor(plugin, 18) / memory()</li>
+          <li><b>Inventories</b>.save(player, file) / restore(player, file) / encode / decode</li>
+          <li><b>Kit</b>.sync(task) / next(task) / later(delay, task) / plugin()</li>
+        </ul>
+        <div class="codebox">
+          <div class="bar"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="label">példák</span><button class="copy">másolás</button></div>
+          <pre><span class="ty">ProxyKit</span>.connect(player, <span class="st">"lobby2"</span>);
+
+<span class="ty">ResourcePackKit</span>.send(player, <span class="st">"https://pack.kylo.hu/p.zip"</span>, <span class="kw">null</span>);
+
+<span class="kw">if</span> (<span class="ty">Compat</span>.isFolia()) {
+    <span class="ty">Compat</span>.atEntity(entity, () -&gt; { <span class="cm">/* referencia-szál */</span> });
+}
+
+<span class="ty">Inventories</span>.save(player, <span class="kw">new</span> <span class="ty">File</span>(getDataFolder(), <span class="st">"mentes.yml"</span>));</pre>
+        </div>
+      </section>
+
     </div>
-  </section>
+  </div>
 
 </main>
 
 <footer>
-  KyloAPI · Minecraft plugin API Paper 26.3-ra · MIT · <a href="https://github.com/KyloPvP/kyloapi">GitHub</a>
+  KyloAPI 1.0 · MIT · készítette KyloPvP · <a href="https://github.com/KyloPvP/kyloapi">GitHub</a>
 </footer>
 
 <!-- macOS dock -->
 <div class="dock" id="dock">
   <a class="dico" href="#top" data-tip="Kezdőlap">⚡</a>
-  <a class="dico" href="#modulok" data-tip="Modulok">📦</a>
+  <a class="dico" href="#menu" data-tip="Menu">🖥️</a>
   <a class="dico" href="#chat" data-tip="Chat">💬</a>
-  <a class="dico" href="#vizual" data-tip="Vizuál">✨</a>
+  <a class="dico" href="#hud" data-tip="HUD">📊</a>
   <span class="sep"></span>
+  <a class="dico" href="#npc" data-tip="NPC">🧍</a>
   <a class="dico" href="#hooks" data-tip="Hookok">🧩</a>
-  <a class="dico" href="#inditas" data-tip="Kezdés">🚀</a>
   <a class="dico" href="https://github.com/KyloPvP/kyloapi" target="_blank" rel="noopener" data-tip="GitHub">🐙</a>
 </div>
 
