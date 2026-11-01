@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KyloAPI — Minecraft plugin API (Paper 26.3+)</title>
+  <meta name="description" content="KyloAPI: minden-egyben Minecraft plugin API Paper szerverekhez — magyarul dokumentálva.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+<div class="aurora">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="blob b3"></div><div class="blob b4"></div>
+</div>
+<div class="grain"></div>
+
+<!-- navbar -->
+<nav class="nav" role="navigation">
+  <a class="logo" href="#top"><span class="dot"></span>KyloAPI</a>
+  <a class="pill" href="#modulok">Modulok</a>
+  <a class="pill" href="#chat">Chat</a>
+  <a class="pill" href="#vizual">Vizuál</a>
+  <a class="pill" href="#hooks">Hookok</a>
+  <a class="pill" href="#inditas">Kezdés</a>
+  <a class="pill" href="https://github.com/KyloPvP/kyloapi" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+
+<main class="wrap" id="top">
+
+  <!-- control-center hero -->
+  <section class="hero reveal">
+    <div class="cc glass">
+      <span class="ver">Paper 26.3+ · JDK 21+ · MIT</span>
+      <h1>KyloAPI</h1>
+      <p class="sub">Egy könyvtár, amivel a pluginfejlesztés élményalapú — nem szenvedésalapú.</p>
+
+      <div class="term">
+        <div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+        <pre>&lt;dependency&gt;
+    &lt;groupId&gt;hu.kylo.kyloapi&lt;/groupId&gt;
+    &lt;artifactId&gt;kyloapi&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+      </div>
+
+      <div class="actions">
+        <a class="btn primary" href="#inditas">Kezdés ⚡</a>
+        <a class="btn" href="https://github.com/KyloPvP/kyloapi" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- modulrács -->
+  <h2 class="sec-title" id="modulok"><span class="ic">📦</span>Modulok</h2>
+  <section class="grid">
+
+    <div class="tile glass reveal">
+      <h3>🖥️ Menu &amp; GUI <span class="tag ok">kész</span></h3>
+      <p>Inventory GUI-k, <code class="k">PagedMenu</code>, Confirm, Anvil/Chat input, <b>yaml-ból definiálható menük</b> a <code class="k">GuiLoader</code>-rel.</p>
+    </div>
+
+    <div class="tile glass reveal">
+      <h3>💬 Chat Engine <span class="tag ok">kész</span></h3>
+      <p>Csatornák, formázás, hover/click a neveken, local chat, staff csatorna, <b>chat.yml sablon</b> + slow-mode.</p>
+    </div>
+
+    <div class="tile glass reveal">
+      <h3>🎨 Text &amp; Colors <span class="tag ok">kész</span></h3>
+      <p>MiniMessage + legacy + HEX, gradient, title, actionbar, <code class="k">Messages</code> (lang.yml-stílus) és <code class="k">Localization</code>.</p>
+    </div>
+
+    <div class="tile glass reveal">
+      <h3>✨ Display &amp; Hologram <span class="tag ok">kész</span></h3>
+      <p>TextDisplay/ItemDisplay builder, animációk, hologramok, <b>követő smart-hologram</b>.</p>
+    </div>
+
+    <div class="tile glass reveal">
+      <h3>⚔️ Combat Visuals <span class="tag new">új</span></h3>
+      <p>Damage popup, critical-felismerés, combo counter — egy <code class="k">CombatVisuals.enable()</code> hívással.</p>
+    </div>
+
+    <div class="tile glass reveal">
+      <h3>🖥️ HUD Engine <span class="tag new">új</span></h3>
+      <p>Health/Mana/Stamina sávok és progress-widgetek bossbaron, formázható tokenekkel.</p>
+    </div>
+
+    <div class="tile glass reveal">
+      <h3>🧍 NPC &amp; Dialogue <span class="tag new">új</span></h3>
+      <p>Per-player NPC-k (<code class="k">NpcKit</code>) és időzített beszélgetések chat-válaszokkal (<code class="k">DialogueKit</code>).</p>
+    </div>
+
+    <div class="tile glass reveal">
+      <h3>🎥 Cinematic <span class="tag new">új</span></h3>
+      <p>Kameraútvonalak smooth easing-gel (cosine), megszakítás támogatás.</p>
+    </div>
+
+    <div class="tile glass reveal">
+      <h3>🌫️ Fake render <span class="tag new">új</span></h3>
+      <p>Per-player blokkok (<code class="k">FakeBlockKit</code>) és fake mobok (<code class="k">FakeEntityKit</code> — packet-alapú).</p>
+    </div>
+
+    <div class="tile glass reveal">
+      <h3>⚡ Ability Engine <span class="tag new">új</span></h3>
+      <p>Item-képességek: cooldown, permission, left/right/hit handler, PDC-alapú felismerés.</p>
+    </div>
+
+    <div class="tile glass reveal">
+      <h3>💠 Particle + Presets <span class="tag ok">kész</span></h3>
+      <p>Circle/sphere/spiral/beam/aura + kész effekt- és GUI-pretész-könyvtár.</p>
+    </div>
+
+    <div class="tile glass reveal">
+      <h3>🍖 Sound &amp; Task <span class="tag ok">kész</span></h3>
+      <p>3D hangok, időzített szekvenciák, <code class="k">Cooldown</code> és <code class="k">Sequence</code> builder.</p>
+    </div>
+
+  </section>
+
+  <!-- chat -->
+  <section id="chat">
+    <h2 class="sec-title"><span class="ic">💬</span>Chat Engine</h2>
+
+    <div class="glass tile reveal" style="max-width: 760px;">
+      <p>Csatornák kódból <b>vagy chat.yml-ből</b>, slow-mode, jogosultság, local-range, hover &amp; click:</p>
+      <div class="codebox">
+        <div class="bar">
+          <span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span>
+          <span class="label">chat.yml</span>
+          <button class="copy">másolás</button>
+        </div>
+        <pre>default: global
+channels:
+  global:
+    format: "&lt;dark_gray&gt;[&lt;aqua&gt;G&lt;dark_gray&gt;] {name}&lt;gray&gt;: &lt;/gray&gt;{message}"
+    hover: "&lt;gray&gt;Játékos: &lt;white&gt;{player}"
+    suggest: "/msg {player} "
+slow-mode-seconds:
+  global: 3</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- vizual -->
+  <section id="vizual">
+    <h2 class="sec-title"><span class="ic">✨</span>Vizuális réteg</h2>
+
+    <div class="grid">
+      <div class="glass tile reveal">
+        <h3>Combat popupok</h3>
+        <div class="codebox">
+          <div class="bar">
+            <span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span>
+            <span class="label">java</span>
+            <button class="copy">másolás</button>
+          </div>
+          <pre><span class="cm">// popup + crit + combo egy hívással</span>
+<span class="ty">CombatVisuals</span>.enable(<span class="kw">this</span>);</pre>
+        </div>
+      </div>
+
+      <div class="glass tile reveal">
+        <h3>HudBars</h3>
+        <div class="codebox">
+          <div class="bar">
+            <span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span>
+            <span class="label">java</span>
+            <button class="copy">másolás</button>
+          </div>
+          <pre><span class="ty">HudBars</span>.bar(player, <span class="st">"hp"</span>,
+    <span class="st">"&lt;red&gt;%bar% %current%/%max%"</span>,
+    <span class="ty">BossBar</span>.<span class="ty">Color</span>.RED)
+    .value(player.getHealth())
+    .max(<span class="kw">20</span>)
+    .push();</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- hooks -->
+  <section id="hooks">
+    <h2 class="sec-title"><span class="ic">🧩</span>Integrációk — 28+ plugin</h2>
+
+    <div class="glass reveal tablewrap" style="padding: 4px;">
+      <table>
+        <thead><tr><th>Hook</th><th>Mit ad</th><th>Státusz</th></tr></thead>
+        <tbody>
+          <tr><td>PacketEvents</td><td>csomag-listenerek, fake blokk/entity</td><td>✅</td></tr>
+          <tr><td>Vault</td><td>pénz (balance/give/take)</td><td>✅</td></tr>
+          <tr><td>LuckPerms</td><td>prefix / suffix / csoport</td><td>✅</td></tr>
+          <tr><td>PlaceholderAPI</td><td>%token% feloldás</td><td>✅</td></tr>
+          <tr><td>WorldGuard</td><td>régió lekérés (<code>inRegion</code>)</td><td>✅</td></tr>
+          <tr><td>GriefPrevention</td><td>claim-tulaj, claim-felismerés</td><td>✅</td></tr>
+          <tr><td>EssentialsX</td><td>egyenleg, nickname</td><td>✅</td></tr>
+          <tr><td>DiscordSRV</td><td>Discord-csatorna üzenet</td><td>✅</td></tr>
+          <tr><td>Citizens / MythicMobs</td><td>NPC / mob felismerés</td><td>✅</td></tr>
+          <tr><td>ViaVersion</td><td>protokollverzió-lekérés</td><td>✅</td></tr>
+          <tr><td>DecentHolograms</td><td>hologram-spawn DH API-val</td><td>✅</td></tr>
+          <tr><td>ItemsAdder / Nexo</td><td>custom item</td><td>✅</td></tr>
+          <tr><td>Geyser / Floodgate</td><td>Bedrock-felismerés</td><td>✅</td></tr>
+          <tr><td>+ ProtocolLib, TAB, spark, Plan, CoreProtect, PlugManX…</td><td>jelenlét + apró segítők</td><td>✅</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- inditas -->
+  <section id="inditas">
+    <h2 class="sec-title"><span class="ic">🚀</span>Kezdés 10 másodperc alatt</h2>
+
+    <div class="glass tile reveal">
+      <p>1) add a függőséget · 2) <code class="k">extends KitPlugin</code> · 3) használd bátran</p>
+
+      <div class="codebox">
+        <div class="bar">
+          <span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span>
+          <span class="label">SajatPlugin.java</span>
+          <button class="copy">másolás</button>
+        </div>
+        <pre><span class="kw">public final class</span> <span class="ty">SajatPlugin</span> <span class="kw">extends</span> <span class="ty">KitPlugin</span> {
+    <span class="an">@Override</span>
+    <span class="kw">protected void</span> onBoot() {
+        <span class="ty">CombatVisuals</span>.enable(<span class="kw">this</span>);
+        <span class="ty">ChatEngine</span>.start(<span class="kw">this</span>);
+
+        <span class="cm">// az első NPC 3 sorban</span>
+        <span class="ty">NpcKit</span>.spawn(player.getLocation(), <span class="st">"&lt;gold&gt;Mester"</span>);
+    }
+}</pre>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  KyloAPI · Minecraft plugin API Paper 26.3-ra · MIT · <a href="https://github.com/KyloPvP/kyloapi" style="color:#7f87a0">GitHub</a>
+</footer>
+
+<!-- macOS dock -->
+<div class="dock" id="dock">
+  <a class="dico" href="#top" data-tip="Kezdőlap">⚡</a>
+  <a class="dico" href="#modulok" data-tip="Modulok">📦</a>
+  <a class="dico" href="#chat" data-tip="Chat">💬</a>
+  <a class="dico" href="#vizual" data-tip="Vizuál">✨</a>
+  <span class="sep"></span>
+  <a class="dico" href="#hooks" data-tip="Hookok">🧩</a>
+  <a class="dico" href="#inditas" data-tip="Kezdés">🚀</a>
+  <a class="dico" href="https://github.com/KyloPvP/kyloapi" target="_blank" rel="noopener" data-tip="GitHub">🐙</a>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
