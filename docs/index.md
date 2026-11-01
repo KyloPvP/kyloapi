@@ -65,7 +65,6 @@ public void onEnable() { /* a KitPlugin caseben az init auto-történik */ }
 | [HUD](hud)        | BossBar, Tab, Scoreboard |
 | [Sound](sound)    | Hangotok |
 | [Chat](chat)      | Csatornák, formátum, hover/click, local chat |
-| [Formula/Messages](formula-messages) | Számolható configok, üzenetkönyvtár |
-| [Placeholders](placeholders) | `%kulcs%` csere |
-| [Task](task)      | TaskKit, Cooldown |
-| [Hooks](hooks)    | PacketEvents (kész), LuckPerms/Vault/PAPI/WorldGuard (tervezés) |
+| [Formula/Mességek](formula-messages) | Számolt configok, üzenetkönyvtár |
+| [Kamerás & Világ](modules)   | Fake blokk/entity, combat vizuálok, NPC, cinematic |
+| [Hooks](hooks)    | PacketEvents (done), Vault/LuckPerms/PAPI hook |
