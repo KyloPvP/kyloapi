@@ -6,10 +6,14 @@ nav_order: 1
 
 # PaperKit 🧰
 
+<div class="hero">
+
 **„Minden egyben" plugin API** Paper szerverekhez (26.3+), magyarul dokumentálva.
 
-Könnyű menüfelmémlő, szövegformázás, hologram, animáció, paricsék és HUD elemek —
-mindegyik úgy megírva, hogy **10 sor alatt bírjam a legnehezebb részt**.
+Könnyű menükezelő, szövegformázás, hologram, animáció, partiklik és HUD elemek —
+mindegyik úgy megírva, hogy **10 sor alatt bemutassa a legnehezebb részt**.
+
+</div>
 
 ```java
 public final class DemuPlugin extends KitPlugin {
@@ -55,16 +59,18 @@ public void onEnable() { /* a KitPlugin caseben az init auto-történik */ }
 
 | Modul    | Mit tud                                       |
 |----------|----------------------------------------------|
-| [Menu](menu)      | Inventory GUI-k, lapozás, Igen/Nem ablak, anvil/chat input |
+| [Menu](menu)      | Inventory GUI-k, lapozás, Igen/Nem ablak, anvil/chat input, **GuiLoader (yaml-menük)** |
 | [Text](text)      | MiniMessage + legacy + hex színek, title, actionbar |
 | [Item](item)      | ItemBuilder |
-| [Config](config)  | Sablon-kezelés |
+| [Config](config)  | Sablon-kezelés, Formula |
+| [Messages](formula-messages) | messages.yml + Localization |
 | [Display](display)| TextDisplay / ItemDisplay / animáció |
 | [Hologram](hologram) | Lebegő szövegek |
 | [Particle](particle) | Circle, sphere, spiral, beam, aura, stb. |
-| [HUD](hud)        | BossBar, Tab, Scoreboard |
-| [Sound](sound)    | Hangotok |
+| [HUD](hud)        | BossBar, Tab, Scoreboard, **HudBars (hp/mana/stamina)** |
+| [Sound](sound)    | Hangok |
 | [Chat](chat)      | Csatornák, formátum, hover/click, local chat |
-| [Formula/Mességek](formula-messages) | Számolt configok, üzenetkönyvtár |
-| [Kamerás & Világ](modules)   | Fake blokk/entity, combat vizuálok, NPC, cinematic |
-| [Hooks](hooks)    | PacketEvents (done), Vault/LuckPerms/PAPI hook |
+| [Combat/Világ](modules) | Fake blokk/entity, damage popup, NPC, cinematic, ability, NpcKit |
+| [Placeholders](placeholders) | `%kulcs%` csere |
+| [Task](task)      | TaskKit, Cooldown, Sequence |
+| [Hooks](hooks)    | ~28 integráció (PacketEvents, Vault, LuckPerms, PAPI, WG, Citizens, ...) |

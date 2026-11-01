@@ -67,7 +67,43 @@ PacketEventsHook.terminate();
 Fontos: a `PacketEventsHook.engage(...)` előtt a többi hívás
 `IllegalStateException`-t dob — így nem felejtheted el az inicializálást.
 
-## Később tervezett
+## További integrációk (hu.paperkit.hooks.integrations)
+
+Reflexióval épültek — fordítási időben **egy külső függőség sem kell**:
+
+| Osztály | Hookok | Mit ad |
+|---|---|---|
+| `ProtectionHooks` | WorldGuard | régió-id-k lekérése, `inRegion(loc, "id")` |
+| | GriefPrevention | claim-felismerés, tulajdonos |
+| | LiteBans | ban-ellenőrzés (Bukkit lista) |
+| | WorldEdit | jelenlét |
+| `CommunityHooks` | EssentialsX | egyensúly, nickname |
+| | Multiverse-Core | menedzselt világ felismerés |
+| | DiscordSRV | üzenet a fő chat-csatornára |
+| | SuperVanish / PremiumVanish | eltűnés-állapot |
+| | SkinsRestorer | jelenlét |
+| `ServerHooks` | ViaVersion | játékos protokoll-verzió |
+| | PlugManX | plugin enable/disable |
+| | ProtocolLib, TAB, spark, Plan, CoreProtect | jelenléti ellenőrzés |
+| `ContentHooks` | Citizens | NPC-felismerés |
+| | MythicMobs | mob-felismerés |
+| | DecentHolograms | hologram-létrehozás DH API-n |
+| | ItemsAdder / Nexo | custom-item felismerés |
+| | Geyser / Floodgate | Bedrock-játékos felismerés |
+| | ModelEngine | jelenlét |
+
+Példa:
+
+```java
+if (ProtectionHooks.GriefPreventionHook.isClaimed(loc)) {
+    // van claim
+}
+CommunityHooks.SuperVanishHook.isVanished(player);
+ServerHooks.ViaVersionHook.protocolVersion(player);
+ContentHooks.DecentHologramsHook.spawnHologram("spawn_holo", loc, List.of("Üdv!"));
+```
+
+## Korai tervek (még nincs kód)
 
 LiteBans (statisztika), CoreProtect (rollback announcer), DiscordSRV
 (Discord → chat engine), Citizens / MythicMobs (NPC és boss integráció),

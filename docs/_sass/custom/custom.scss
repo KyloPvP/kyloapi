@@ -1,0 +1,44 @@
+---
+---
+
+/* PaperKit egyedi stílus (a just-the-docs automatikusan betölti) */
+
+/* Hoveres táblázatok */
+.main-content table {
+  thead {
+    background-color: rgba(0, 122, 255, 0.08);
+  }
+  tbody tr:hover {
+    background-color: rgba(0, 122, 255, 0.06);
+  }
+}
+
+/* Címek finom negatív betűtávolsága */
+.main-content h1 {
+  letter-spacing: -0.5px;
+}
+
+/* Kerekített kód-blokkok */
+.main-content pre {
+  border-radius: 10px;
+}
+
+/* Hero-kártya a kezdőlaphoz */
+.hero {
+  padding: 2rem 1rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0, 122, 255, 0.12), rgba(138, 43, 226, 0.12));
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.6em;
+  margin-bottom: 0.4rem;
+}
+
+.hero p.tagline {
+  font-size: 1.15em;
+  max-width: 46rem;
+  margin: 0 auto;
+}

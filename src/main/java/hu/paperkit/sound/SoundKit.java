@@ -1,4 +1,4 @@
-package hu.paperkit.hud;
+package hu.paperkit.sound;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

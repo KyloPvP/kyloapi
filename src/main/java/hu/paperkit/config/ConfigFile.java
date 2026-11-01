@@ -176,6 +176,17 @@ public final class ConfigFile {
     }
 
     /**
+     * Adott szekcio mint ConfigurationSection (vagy null, ha nincs).
+     * A GUI/loader type megoldashoz hasznos.
+     *
+     * @param path az utvonal
+     * @return a szekcio vagy null
+     */
+    public ConfigurationSection node(final String path) {
+        return yaml.getConfigurationSection(path);
+    }
+
+    /**
      * Adott szekcio kulcscinai (nem ri nktrl?).
      */
     public List<String> keys(final String path) {

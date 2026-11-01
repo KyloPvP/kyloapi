@@ -118,6 +118,7 @@ Notifier.announce(player, "<gold>SZINT", "Léptél!", 60);
 
 ## többi modul
 
+- **GuiLoader** — yaml-ból definiált menük: `guis.yml` + `[COMMAND]`/`[SOUND]`/`[CONNECT]` akciók, saját `[XX]` akció regisztrálás
 - **CommandKit** — DSL-alapú alparancs-router (permission, tab, playerOnly)
 - **Localization** — többnyelvű üzenetek (locale szerint: `messages_hu.yml`)
 - **Inventories** — inventory mentés/visszatöltés fájlba
@@ -126,3 +127,9 @@ Notifier.announce(player, "<gold>SZINT", "Léptél!", 60);
 - **ResourcePackKit** — pack kérés natívan
 - **DebugKit** — timing, TPS-monitor, memória
 - **VaultHook / LuckPermsHook / PapiHook** — reflekciós integrációk
+- **`hu.paperkit.hooks.integrations`** —ToWorldGuard, EssentialsX, Citizens, MythicMobs, DiscordSRV és társaik (reflexió)
+
+## Példaprogram
+
+Az [`example/SajatPlugin.java`](https://github.com/KyloPvP/kyloapi/blob/main/example/SajatPlugin.java)
+fájl egy teljes demo plugin, ami gyakorlatilag az összes modult használja.
