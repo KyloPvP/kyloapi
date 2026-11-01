@@ -7,7 +7,7 @@ parent: Modulok
 
 # 🧩 Hook modul (opcionális integrációk)
 
-A cél: a PaperKit működjön **önállóan egyedül**, de automatikusan
+A cél: a KyloAPI működjön **önállóan egyedül**, de automatikusan
 kihasználja, amint egy híres plugin telepítve van a szerverre.
 
 ## Elvek

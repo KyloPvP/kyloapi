@@ -33,7 +33,7 @@ A formátum MiniMessage. Használható tokenek:
 | `{name}`    | a játékos neve — hover + click esélyel          |
 | `{player}`  | a nyers játékosnév                              |
 | `{message}` | maga az üzenet (biztonságos, nem MiniMessage)   |
-| `%papi%`    | PaperKit `Placeholders` (PAPI-kompatibilis minta) |
+| `%papi%`    | KyloAPI `Placeholders` (PAPI-kompatibilis minta) |
 
 ```java
 ChatEngine.registerChannel(

@@ -1,6 +1,6 @@
 # Site settings
-title: "PaperKit"
-subtitle: "Minden-egyben Minecraft plugin API — Paper 26.3"
+title: "KyloAPI"
+subtitle: "Minecraft plugin API — Paper 26.3+ · magyarul"
 description: >-
   Egyszerű plugin fejlesztés Paper szerverhez: menük, szövegformázás,
   hologramok, animációk, partiklik és minden — magyar dokumentációval.
@@ -11,7 +11,7 @@ repository: "KyloPvP/kyloapi"
 # Téma és motor
 theme: just-the-docs
 permalink: pretty
-color_scheme: "light"
+color_scheme: "dark"
 
 # Keresés bekapcsolása
 search_enabled: true
@@ -28,7 +28,7 @@ back_to_top: true
 back_to_top_text: "↑ Tetejére"
 
 # Footer
-footer_content: "PaperKit — MIT-szerű licenc jóindulattal 💙 · <a href='https://github.com/KyloPvP/kyloapi'>GitHub</a>"
+footer_content: "KyloAPI · <a href='https://github.com/KyloPvP/kyloapi'>GitHub</a>"
 
 # Látható GIT-branch + social-link blokk
 gh_edit_link: true

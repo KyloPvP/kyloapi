@@ -1,44 +1,262 @@
 ---
 ---
 
-/* PaperKit egyedi stílus (a just-the-docs automatikusan betölti) */
+/* ============================================================
+   KyloAPI — macOS / iOS "liquid glass" :: sotet tema
+   (a just-the-docs automatikusan betolti ezt a fajlt)
+   ============================================================ */
 
-/* Hoveres táblázatok */
-.main-content table {
-  thead {
-    background-color: rgba(0, 122, 255, 0.08);
-  }
-  tbody tr:hover {
-    background-color: rgba(0, 122, 255, 0.06);
-  }
+/* ---------- alapok ---------- */
+
+:root {
+  --kylo-accent: #6d8cff;           /* kék (macOS rendszerkék) */
+  --kylo-accent-2: #b57bff;         /* lila */
+  --kylo-glass-bg: rgba(20, 24, 38, 0.55);
+  --kylo-glass-border: rgba(255, 255, 255, 0.10);
+  --kylo-glass-blur: blur(22px) saturate(150%);
 }
 
-/* Címek finom negatív betűtávolsága */
-.main-content h1 {
-  letter-spacing: -0.5px;
+html,
+body {
+  background: #05060c;
+  color: #e9ecf5;
 }
 
-/* Kerekített kód-blokkok */
-.main-content pre {
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+      "SF Pro Display", "Helvetica Neue", "Segoe UI", system-ui,
+      sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.01em;
+}
+
+/* Aurora-blobok a hatterben (fixed, nem licenselhető) */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+body::before {
+  width: 60vw;
+  height: 60vw;
+  top: -18vw;
+  left: -12vw;
+  background: radial-gradient(circle, #2b49ff 0%, transparent 70%);
+}
+
+body::after {
+  width: 55vw;
+  height: 55vw;
+  bottom: -16vw;
+  right: -10vw;
+  background: radial-gradient(circle, #8b4bff 0%, transparent 70%);
+}
+
+/* ---------- glass-card segédosztály ---------- */
+
+.glass-card {
+  background: var(--kylo-glass-bg);
+  border: 1px solid var(--kylo-glass-border);
+  border-radius: 18px;
+  backdrop-filter: var(--kylo-glass-blur);
+  -webkit-backdrop-filter: var(--kylo-glass-blur);
+  box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.08) inset,
+      0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- oldalsav (macOS menüsor érzet) ---------- */
+
+.side-bar {
+  background: rgba(10, 12, 22, 0.62) !important;
+  backdrop-filter: var(--kylo-glass-blur) !important;
+  -webkit-backdrop-filter: var(--kylo-glass-blur) !important;
+  border-right: 1px solid var(--kylo-glass-border) !important;
+}
+
+.site-nav {
+  background: transparent !important;
+  color: #cfd6e6;
+}
+
+.site-nav .nav-list-item.active > .nav-list-link {
+  color: #fff !important;
+  background: rgba(109, 140, 255, 0.18) !important;
   border-radius: 10px;
 }
 
-/* Hero-kártya a kezdőlaphoz */
+.site-nav .nav-list-link:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 10px;
+}
+
+/* kereses glass input */
+.site-header,
+aux nav {
+  background: transparent !important;
+}
+
+.search-input {
+  background: var(--kylo-glass-bg) !important;
+  border: 1px solid var(--kylo-glass-border) !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+  backdrop-filter: var(--kylo-glass-blur) !important;
+  -webkit-backdrop-filter: var(--kylo-glass-blur) !important;
+}
+
+/* ---------- hero (kezdolap) ---------- */
+
 .hero {
-  padding: 2rem 1rem;
-  border-radius: 14px;
-  background: linear-gradient(135deg, rgba(0, 122, 255, 0.12), rgba(138, 43, 226, 0.12));
-  margin-bottom: 2rem;
+  padding: 3rem 1.5rem !important;
+  border-radius: 26px !important;
   text-align: center;
+  margin-bottom: 2.5rem !important;
+  background:
+      linear-gradient(135deg, rgba(109, 140, 255, 0.16),
+             rgba(181, 123, 255, 0.14)),
+      var(--kylo-glass-bg);
+  backdrop-filter: var(--kylo-glass-blur);
+  -webkit-backdrop-filter: var(--kylo-glass-blur);
+  border: 1px solid var(--kylo-glass-border);
+  box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.08) inset,
+      0 30px 70px rgba(0, 0, 0, 0.5);
 }
 
-.hero h1 {
-  font-size: 2.6em;
-  margin-bottom: 0.4rem;
+.hero h2 {
+  font-size: 2.4em;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  margin: 0 0 0.3rem;
+  background: linear-gradient(90deg, #9bb3ff, #d3b0ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.hero p.tagline {
-  font-size: 1.15em;
-  max-width: 46rem;
-  margin: 0 auto;
+.hero p {
+  color: #c7cede;
+  font-size: 1.05em;
+  margin: 0;
+}
+
+/* ---------- tartalom panel ---------- */
+
+.main-content {
+  color: #e6eaf4;
+}
+
+.main-content hr {
+  border-color: var(--kylo-glass-border);
+}
+
+/* fejezetek */
+.main-content h1,
+.main-content h2,
+.main-content h3 {
+  color: #f2f4fa;
+  font-weight: 650;
+  letter-spacing: -0.4px;
+}
+
+/* kód blokk glass */
+.main-content .highlighter-rouge,
+.main-content .language-mermaid > .mermaid,
+.language-mermaid {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.main-content pre.highlight,
+.main-content .highlighter-rouge .highlight,
+.highlighter-rouge pre {
+  background: rgba(12, 15, 26, 0.66) !important;
+  border: 1px solid var(--kylo-glass-border) !important;
+  border-radius: 16px !important;
+  backdrop-filter: var(--kylo-glass-blur) !important;
+  -webkit-backdrop-filter: var(--kylo-glass-blur) !important;
+  color: #dfe5f5 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.main-content pre code {
+  color: #cad3ea;
+}
+
+/* inline kód */
+.main-content code {
+  background: rgba(109, 140, 255, 0.14);
+  border-radius: 7px;
+  color: #b7c8ff;
+  padding: 2px 7px;
+}
+
+/* tablázat glass */
+.main-content table {
+  border: 1px solid var(--kylo-glass-border) !important;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--kylo-glass-bg) !important;
+  backdrop-filter: var(--kylo-glass-blur) !important;
+  -webkit-backdrop-filter: var(--kylo-glass-blur) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.main-content table thead {
+  background: rgba(109, 140, 255, 0.14) !important;
+}
+
+.main-content table thead th {
+  color: #e4e9f7;
+  border-bottom: 1px solid var(--kylo-glass-border);
+}
+
+.main-content table td {
+  color: #cdd4e6;
+}
+
+.main-content table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.main-content table tbody tr:hover {
+  background: rgba(109, 140, 255, 0.10);
+}
+
+/* blockquote glass */
+.main-content blockquote {
+  background: var(--kylo-glass-bg);
+  border-left: 3px solid var(--kylo-accent) !important;
+  border-radius: 12px;
+  color: #cdd4e6;
+  backdrop-filter: var(--kylo-glass-blur);
+  -webkit-backdrop-filter: var(--kylo-glass-blur);
+}
+
+/* linkek */
+.main-content a {
+  color: #9db2ff;
+  text-decoration-color: rgba(157, 178, 255, 0.4);
+}
+
+.main-content a:hover {
+  color: #c4d3ff;
+}
+
+/* lábléc */
+.site-footer {
+  border-top: 1px solid var(--kylo-glass-border) !important;
+}
+
+/* kijelölés színe */
+::selection {
+  background: rgba(109, 140, 255, 0.35);
 }

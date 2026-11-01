@@ -8,7 +8,7 @@ parent: Modulok
 # 🧮 Formula és Messages
 
 Két config-építő eszköz, a klasszikus kész pluginok (pl. AxHoes) konfig
-stílusát hozza el a PaperKit-be: **számolható beállítások** és
+stílusát hozza el a KyloAPI-ba: **számolható beállítások** és
 **fájlból szabályozható üzenetek**.
 
 ## Formula — matematikai kifejezések
@@ -89,7 +89,7 @@ Component c = msg.component(player, "item-name", "<white>Kezi targy");
 |---------------|----------------------------------|
 | `%level%`     | a kulcs-érték párokból           |
 | `%receiver%`  | a címzett neve (Player sends)    |
-| `%papi_xxx%`  | PaperKit `Placeholders` (PAPI-minta) |
+| `%papi_xxx%`  | KyloAPI `Placeholders` (PAPI-minta) |
 
 A `prefix` kulcs **nem token**: minden üzenet elé automatikusan rákerül.
 

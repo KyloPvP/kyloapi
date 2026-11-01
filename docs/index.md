@@ -4,14 +4,12 @@ title: "Kezdőlap"
 nav_order: 1
 ---
 
-# PaperKit 🧰
+# KyloAPI
 
-<div class="hero">
+<div class="hero glass-card">
 
-**„Minden egyben" plugin API** Paper szerverekhez (26.3+), magyarul dokumentálva.
-
-Könnyű menükezelő, szövegformázás, hologram, animáció, partiklik és HUD elemek —
-mindegyik úgy megírva, hogy **10 sor alatt bemutassa a legnehezebb részt**.
+## KyloAPI
+Minecraft plugin API — Paper 26.3+ · magyarul
 
 </div>
 
@@ -20,7 +18,7 @@ public final class DemuPlugin extends KitPlugin {
     @Override
     protected void onBoot() {
         Msg.send(getServer().getConsoleSender(),
-                 "<green><bold>Szerver elindult!</bold>> Az API készen ál!");
+                 "<green><bold>Szerver elindult!</bold> Az API készen áll!");
     }
 }
 ```
