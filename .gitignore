@@ -1,0 +1,27 @@
+target/
+build/
+.gradle/
+*.class
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Maven wrapperha userben csinál
+.mvn/
+mvnw
+mvnw.cmd
+
+# Jekyll build output
+docs/_site/
+docs/.jekyll-cache/
