@@ -71,3 +71,23 @@ const spy = new IntersectionObserver((entries) => {
 }, { rootMargin: "-40% 0px -55% 0px" });
 
 targets.forEach((t) => spy.observe(t));
+
+// 5) Statisztika számlálók: 0-ban indulnak, belépéskor csörögnek fel
+document.querySelectorAll(".stat .n[data-count]").forEach((el) => {
+  const target = parseInt(el.getAttribute("data-count"), 10);
+  const started = (entry) => {
+    if (!entry[0].isIntersecting) return;
+    countObserver.disconnect();
+    const t0 = performance.now();
+    const dur = 1100;
+    const tick = (t) => {
+      const p = Math.min(1, (t - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + (p === 1 ? "" : "");
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const countObserver = new IntersectionObserver(started, { threshold: 0.4 });
+  countObserver.observe(el.parentElement);
+});

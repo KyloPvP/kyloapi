@@ -10,120 +10,142 @@
 </head>
 <body>
 
-<div class="aurora">
-  <div class="blob b1"></div><div class="blob b2"></div>
-  <div class="blob b3"></div><div class="blob b4"></div>
+<div class="glowbg"></div>
+<div class="gridbg"></div>
+
+<!-- felső sáv (daisy beta-sorra gondolva) -->
+<div class="strip">
+  <span class="badge">✦ API</span>
+  <span><b>Nyílt könyvtár</b> · MIT licenc · folyamatos fejlesztés · készül CasaKylo műhelyében</span>
 </div>
-<div class="grain"></div>
 
 <!-- navbar -->
-<nav class="nav" role="navigation">
-  <a class="logo" href="#top"><span class="dot"></span>KyloAPI</a>
+<nav class="nav">
+  <a class="logo" href="#top"><span class="mark">⚡</span>KyloAPI</a>
   <a class="pill" href="#modulok">Modulok</a>
   <a class="pill" href="#chat">Chat</a>
   <a class="pill" href="#vizual">Vizuál</a>
   <a class="pill" href="#hooks">Hookok</a>
   <a class="pill" href="#inditas">Kezdés</a>
-  <a class="pill" href="https://github.com/KyloPvP/kyloapi" target="_blank" rel="noopener">GitHub ↗</a>
+  <a class="gh" href="https://github.com/KyloPvP/kyloapi" target="_blank" rel="noopener">GitHub ↗</a>
 </nav>
 
 <main class="wrap" id="top">
 
-  <!-- control-center hero -->
-  <section class="hero reveal">
-    <div class="cc glass">
-      <span class="ver">Paper 26.3+ · JDK 21+ · MIT</span>
-      <h1>KyloAPI</h1>
-      <p class="sub">Egy könyvtár, amivel a pluginfejlesztés élményalapú — nem szenvedésalapú.</p>
-
-      <div class="term">
-        <div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i></div>
-        <pre>&lt;dependency&gt;
-    &lt;groupId&gt;hu.kylo.kyloapi&lt;/groupId&gt;
-    &lt;artifactId&gt;kyloapi&lt;/artifactId&gt;
-    &lt;version&gt;1.0.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
-      </div>
-
+  <!-- hero: bal szöveg / jobb mock -->
+  <section class="hero">
+    <div class="reveal">
+      <span class="kicker">✦ MINECRAFT SZERVEREKNEK · PAPER 26.3+</span>
+      <h1>Kylo<span class="a">API</span></h1>
+      <p class="tagline">(M)Egy API — tíze plugin-ötlet.</p>
+      <p class="desc">
+        <b>Minden egyben</b> Minecraft plugin-könyvtár Paper szerverekhez:
+        menük, chat, hologram, animáció, HUD és packet-szintű vizuálok —
+        <b>magyar fejlesztőnek, magyar dokumentációval</b>.
+      </p>
       <div class="actions">
-        <a class="btn primary" href="#inditas">Kezdés ⚡</a>
-        <a class="btn" href="https://github.com/KyloPvP/kyloapi" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn primary" href="#inditas">Kezdj bele <span class="arrow">→</span></a>
+        <a class="btn ghost" href="https://github.com/KyloPvP/kyloapi" target="_blank" rel="noopener">
+          <span style="opacity:.6">▷</span> Nézd meg a kódot
+        </a>
+      </div>
+      <p class="mini">JDK 21+ · Zero konfigu · A menuket elég egy <b>guis.yml</b>-ből is olvassa.</p>
+    </div>
+
+    <div class="mock reveal">
+      <div class="win">
+        <div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i><span class="url">plugin://sajatplugin</span></div>
+        <div class="inner">
+          <div class="rows">
+            <div class="row"><span class="chk">✓</span><b>ChatEngine</b>&nbsp;start() &nbsp;·&nbsp; csatornák, slow-mode</div>
+            <div class="row"><span class="chk">✓</span><b>CombatVisuals</b>&nbsp;enable() &nbsp;·&nbsp; popup, crit, combo</div>
+            <div class="row"><span class="chk">✓</span><b>NpcKit</b>&nbsp;spawn() &nbsp;·&nbsp; per-player NPC és dialógus</div>
+            <div class="row"><span class="chk">✓</span><b>HudBars</b>&nbsp;bar() &nbsp;·&nbsp; HP / mana / progress</div>
+            <div class="row"><span class="chk">✓</span><b>GuiLoader</b>&nbsp;open() &nbsp;·&nbsp; guis.yml menuk</div>
+            <div class="row"><span class="chk">✓</span><b>CinematicKit</b>&nbsp;play() &nbsp;·&nbsp; kamera-utak</div>
+          </div>
+        </div>
+      </div>
+      <div class="phone glass">
+        <div class="time"><span>22:27</span><span>5G ▮▮▮</span></div>
+        <div class="app">
+          <span class="l"></span>
+          <span class="l acc" style="width:70%"></span>
+          <span class="l"></span>
+          <span class="l hot"></span>
+          <span class="l" style="width:85%"></span>
+          <span class="l acc" style="width:50%"></span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- modulrács -->
+  <!-- statisztika -->
+  <section class="stats">
+    <div class="stat glass reveal"><div class="n" data-count="30">0</div><div class="t">modul — menü, chat, HUD, NPC, packet...</div></div>
+    <div class="stat glass reveal"><div class="n" data-count="28">0</div><div class="t">integráció — Vault-tól WorldGuard-ig</div></div>
+    <div class="stat glass reveal"><div class="n" data-count="1000">0</div><div class="t">legacy- és MiniMessage-szín, HEX, gradient</div></div>
+    <div class="stat glass reveal"><div class="n">0</div><div class="t">külső runtime-függőség — mind reflexióval</div></div>
+  </section>
+
+  <!-- modulok -->
   <h2 class="sec-title" id="modulok"><span class="ic">📦</span>Modulok</h2>
   <section class="grid">
-
     <div class="tile glass reveal">
       <h3>🖥️ Menu &amp; GUI <span class="tag ok">kész</span></h3>
       <p>Inventory GUI-k, <code class="k">PagedMenu</code>, Confirm, Anvil/Chat input, <b>yaml-ból definiálható menük</b> a <code class="k">GuiLoader</code>-rel.</p>
     </div>
-
     <div class="tile glass reveal">
       <h3>💬 Chat Engine <span class="tag ok">kész</span></h3>
       <p>Csatornák, formázás, hover/click a neveken, local chat, staff csatorna, <b>chat.yml sablon</b> + slow-mode.</p>
     </div>
-
     <div class="tile glass reveal">
       <h3>🎨 Text &amp; Colors <span class="tag ok">kész</span></h3>
       <p>MiniMessage + legacy + HEX, gradient, title, actionbar, <code class="k">Messages</code> (lang.yml-stílus) és <code class="k">Localization</code>.</p>
     </div>
-
     <div class="tile glass reveal">
       <h3>✨ Display &amp; Hologram <span class="tag ok">kész</span></h3>
       <p>TextDisplay/ItemDisplay builder, animációk, hologramok, <b>követő smart-hologram</b>.</p>
     </div>
-
     <div class="tile glass reveal">
       <h3>⚔️ Combat Visuals <span class="tag new">új</span></h3>
       <p>Damage popup, critical-felismerés, combo counter — egy <code class="k">CombatVisuals.enable()</code> hívással.</p>
     </div>
-
     <div class="tile glass reveal">
       <h3>🖥️ HUD Engine <span class="tag new">új</span></h3>
       <p>Health/Mana/Stamina sávok és progress-widgetek bossbaron, formázható tokenekkel.</p>
     </div>
-
     <div class="tile glass reveal">
       <h3>🧍 NPC &amp; Dialogue <span class="tag new">új</span></h3>
       <p>Per-player NPC-k (<code class="k">NpcKit</code>) és időzített beszélgetések chat-válaszokkal (<code class="k">DialogueKit</code>).</p>
     </div>
-
     <div class="tile glass reveal">
       <h3>🎥 Cinematic <span class="tag new">új</span></h3>
       <p>Kameraútvonalak smooth easing-gel (cosine), megszakítás támogatás.</p>
     </div>
-
     <div class="tile glass reveal">
       <h3>🌫️ Fake render <span class="tag new">új</span></h3>
       <p>Per-player blokkok (<code class="k">FakeBlockKit</code>) és fake mobok (<code class="k">FakeEntityKit</code> — packet-alapú).</p>
     </div>
-
     <div class="tile glass reveal">
       <h3>⚡ Ability Engine <span class="tag new">új</span></h3>
       <p>Item-képességek: cooldown, permission, left/right/hit handler, PDC-alapú felismerés.</p>
     </div>
-
     <div class="tile glass reveal">
       <h3>💠 Particle + Presets <span class="tag ok">kész</span></h3>
-      <p>Circle/sphere/spiral/beam/aura + kész effekt- és GUI-pretész-könyvtár.</p>
+      <p>Circle/sphere/spiral/beam/aura + kész effekt- és GUI-preset-könyvtár.</p>
     </div>
-
     <div class="tile glass reveal">
       <h3>🍖 Sound &amp; Task <span class="tag ok">kész</span></h3>
       <p>3D hangok, időzített szekvenciák, <code class="k">Cooldown</code> és <code class="k">Sequence</code> builder.</p>
     </div>
-
   </section>
 
   <!-- chat -->
   <section id="chat">
     <h2 class="sec-title"><span class="ic">💬</span>Chat Engine</h2>
-
-    <div class="glass tile reveal" style="max-width: 760px;">
-      <p>Csatornák kódból <b>vagy chat.yml-ből</b>, slow-mode, jogosultság, local-range, hover &amp; click:</p>
+    <div class="glass tile reveal" style="max-width: 780px;">
+      <p>Csatornák kódból <b>vagy chat.yml-ből</b> — slow-mode, jogosultság, local-range, hover &amp; click:</p>
       <div class="codebox">
         <div class="bar">
           <span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span>
@@ -145,7 +167,6 @@ slow-mode-seconds:
   <!-- vizual -->
   <section id="vizual">
     <h2 class="sec-title"><span class="ic">✨</span>Vizuális réteg</h2>
-
     <div class="grid">
       <div class="glass tile reveal">
         <h3>Combat popupok</h3>
@@ -159,7 +180,6 @@ slow-mode-seconds:
 <span class="ty">CombatVisuals</span>.enable(<span class="kw">this</span>);</pre>
         </div>
       </div>
-
       <div class="glass tile reveal">
         <h3>HudBars</h3>
         <div class="codebox">
@@ -182,25 +202,24 @@ slow-mode-seconds:
   <!-- hooks -->
   <section id="hooks">
     <h2 class="sec-title"><span class="ic">🧩</span>Integrációk — 28+ plugin</h2>
-
-    <div class="glass reveal tablewrap" style="padding: 4px;">
+    <div class="glass reveal tablewrap">
       <table>
         <thead><tr><th>Hook</th><th>Mit ad</th><th>Státusz</th></tr></thead>
         <tbody>
-          <tr><td>PacketEvents</td><td>csomag-listenerek, fake blokk/entity</td><td>✅</td></tr>
-          <tr><td>Vault</td><td>pénz (balance/give/take)</td><td>✅</td></tr>
-          <tr><td>LuckPerms</td><td>prefix / suffix / csoport</td><td>✅</td></tr>
-          <tr><td>PlaceholderAPI</td><td>%token% feloldás</td><td>✅</td></tr>
-          <tr><td>WorldGuard</td><td>régió lekérés (<code>inRegion</code>)</td><td>✅</td></tr>
-          <tr><td>GriefPrevention</td><td>claim-tulaj, claim-felismerés</td><td>✅</td></tr>
-          <tr><td>EssentialsX</td><td>egyenleg, nickname</td><td>✅</td></tr>
-          <tr><td>DiscordSRV</td><td>Discord-csatorna üzenet</td><td>✅</td></tr>
-          <tr><td>Citizens / MythicMobs</td><td>NPC / mob felismerés</td><td>✅</td></tr>
-          <tr><td>ViaVersion</td><td>protokollverzió-lekérés</td><td>✅</td></tr>
-          <tr><td>DecentHolograms</td><td>hologram-spawn DH API-val</td><td>✅</td></tr>
-          <tr><td>ItemsAdder / Nexo</td><td>custom item</td><td>✅</td></tr>
-          <tr><td>Geyser / Floodgate</td><td>Bedrock-felismerés</td><td>✅</td></tr>
-          <tr><td>+ ProtocolLib, TAB, spark, Plan, CoreProtect, PlugManX…</td><td>jelenlét + apró segítők</td><td>✅</td></tr>
+          <tr><td>PacketEvents</td><td>csomag-listenerek, fake blokk/entity</td><td class="tick">●</td></tr>
+          <tr><td>Vault</td><td>pénz (balance/give/take)</td><td class="tick">●</td></tr>
+          <tr><td>LuckPerms</td><td>prefix / suffix / csoport</td><td class="tick">●</td></tr>
+          <tr><td>PlaceholderAPI</td><td>%token% feloldás</td><td class="tick">●</td></tr>
+          <tr><td>WorldGuard</td><td>régió lekérés (<code>inRegion</code>)</td><td class="tick">●</td></tr>
+          <tr><td>GriefPrevention</td><td>claim-tulaj, claim-felismerés</td><td class="tick">●</td></tr>
+          <tr><td>EssentialsX</td><td>egyenleg, nickname</td><td class="tick">●</td></tr>
+          <tr><td>DiscordSRV</td><td>Discord-csatorna üzenet</td><td class="tick">●</td></tr>
+          <tr><td>Citizens / MythicMobs</td><td>NPC / mob felismerés</td><td class="tick">●</td></tr>
+          <tr><td>ViaVersion</td><td>protokollverzió-lekérés</td><td class="tick">●</td></tr>
+          <tr><td>DecentHolograms</td><td>hologram-spawn DH API-val</td><td class="tick">●</td></tr>
+          <tr><td>ItemsAdder / Nexo</td><td>custom item</td><td class="tick">●</td></tr>
+          <tr><td>Geyser / Floodgate</td><td>Bedrock-felismerés</td><td class="tick">●</td></tr>
+          <tr><td>+ ProtocolLib, TAB, spark, Plan, CoreProtect, PlugManX…</td><td>jelenlét + apró segítők</td><td class="tick">●</td></tr>
         </tbody>
       </table>
     </div>
@@ -209,10 +228,8 @@ slow-mode-seconds:
   <!-- inditas -->
   <section id="inditas">
     <h2 class="sec-title"><span class="ic">🚀</span>Kezdés 10 másodperc alatt</h2>
-
     <div class="glass tile reveal">
       <p>1) add a függőséget · 2) <code class="k">extends KitPlugin</code> · 3) használd bátran</p>
-
       <div class="codebox">
         <div class="bar">
           <span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span>
@@ -236,7 +253,7 @@ slow-mode-seconds:
 </main>
 
 <footer>
-  KyloAPI · Minecraft plugin API Paper 26.3-ra · MIT · <a href="https://github.com/KyloPvP/kyloapi" style="color:#7f87a0">GitHub</a>
+  KyloAPI · Minecraft plugin API Paper 26.3-ra · MIT · <a href="https://github.com/KyloPvP/kyloapi">GitHub</a>
 </footer>
 
 <!-- macOS dock -->
