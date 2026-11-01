@@ -195,6 +195,8 @@ public final class ChatEngine implements Listener {
         }
     }
 
+    private static final hu.paperkit.util.Cooldown SLOW_COOLDOWN = new hu.paperkit.util.Cooldown();
+
     /**
      * Uzenet kuldese egy jatekos csatornajaba (vagy megadott csatornaba).
      * Nem fut le, ha a jatekos nem jogosult a csatornra.
@@ -217,6 +219,17 @@ public final class ChatEngine implements Listener {
         if (!channel.canTalk(player)) {
             Msg.send(player, "<red>Nincs jogosultsagod ehhez a csatornahoz!");
             return;
+        }
+        // slow-mode ellenorzes
+        final Long slowMillis = SLOW_MODE.get(channel.id());
+        if (slowMillis != null && slowMillis > 0) {
+            final String key = "chat_slow_" + channel.id();
+            if (SLOW_COOLDOWN.isOnCooldown(player.getUniqueId(), key)) {
+                Msg.send(player, "<red>Lass Vikings belai: <white>"
+                        + SLOW_COOLDOWN.remainingSeconds(player.getUniqueId(), key) + " <red>mp!");
+                return;
+            }
+            SLOW_COOLDOWN.set(player.getUniqueId(), key, slowMillis);
         }
         broadcast(channel, player, message);
     }
@@ -249,6 +262,102 @@ public final class ChatEngine implements Listener {
                 engine.plugin.getLogger().log(Level.WARNING, "ChatEngine hiba: chat kuldese nem sikerult", e);
             }
         });
+    }
+
+    /**
+     * Kisbeszik a lassitasok flaged, na oszzelatkvetelo beoekt.
+     */
+    private static final Map<String, Long> SLOW_MODE = new ConcurrentHashMap<>();
+
+    /**
+     * Lassitott mod: adott csatornaban a beirasok kozott minimum id.
+     *
+     * @param channelId a csatorna id
+     * @param seconds   varakozas masodpercben; 0 = kikapcs
+     */
+    public static void setSlowMode(final String channelId, final int seconds) {
+        if (seconds <= 0) {
+            SLOW_MODE.remove(channelId == null ? "" : channelId.toLowerCase());
+        } else {
+            SLOW_MODE.put(channelId.toLowerCase(), seconds * 1000L);
+        }
+    }
+
+    /**
+     * Csatornak beolvasasa chat.yml fajlbol.
+     *
+     * <p>Yaml-minta:</p>
+     *
+     * <pre>{@code
+     * default: global
+     * channels:
+     *   global:
+     *     format: "<dark_gray>[<aqua>G<dark_gray>] {name}<gray>: </gray>{message}"
+     *     hover: "<gray>Jatekos: <white>{player}"
+     *     suggest: "/msg {player} "
+     *   staff:
+     *     format: "<dark_red>[STAFF] {name}: {message}"
+     *     permission: "paperkit.chat.staff"
+     * slow-mode-seconds:
+     *   global: 3
+     * }</pre>
+     *
+     * @param plugin a plugin (chat.yml a data folderben)
+     */
+    public static void loadFromConfig(final org.bukkit.plugin.java.JavaPlugin plugin) {
+        final ChatEngine engine = instance();
+        final var config = hu.paperkit.config.ConfigFile.load(plugin, "chat.yml");
+        final var channels = config.node("channels");
+        if (channels != null) {
+            for (final String id : channels.getKeys(false)) {
+                final var section = channels.getConfigurationSection(id);
+                if (section == null) {
+                    continue;
+                }
+                final Channel channel = Channel.create(id, section.getString("format", "{name}: {message}"));
+                final String permission = section.getString("permission");
+                if (permission != null && !permission.isBlank()) {
+                    channel.permission(permission);
+                }
+                final String prefix = section.getString("prefix");
+                if (prefix != null) {
+                    channel.prefix(prefix);
+                }
+                final String hover = section.getString("hover");
+                if (hover != null) {
+                    channel.hover(hover);
+                }
+                final String suggest = section.getString("suggest");
+                if (suggest != null) {
+                    channel.suggest(suggest);
+                }
+                final String run = section.getString("run");
+                if (run != null) {
+                    channel.run(run);
+                }
+                final String nameColor = section.getString("name-color");
+                if (nameColor != null) {
+                    channel.nameColor(nameColor);
+                }
+                final int range = section.getInt("range", 0);
+                if (range > 0) {
+                    channel.range(range);
+                }
+                registerChannel(channel);
+            }
+        }
+        final String defaultId = config.getString("default", null);
+        if (defaultId != null) {
+            engine.defaultChannelId = defaultId.toLowerCase();
+        }
+        final var slow = config.node("slow-mode-seconds");
+        if (slow != null) {
+            for (final String id : slow.getKeys(false)) {
+                setSlowMode(id, slow.getInt(id, 0));
+            }
+        }
+        Msg.info("<aqua>ChatEngine: <white>" + engine.channels.size()
+                + "<aqua> csatorna betoltve a chat.yml-bol!");
     }
 
     /**

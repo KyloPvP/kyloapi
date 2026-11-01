@@ -75,6 +75,39 @@ ChatEngine.send(player, null, "Hello!");    // a játékos aktív csatornájába
 ChatEngine.send(player, "staff", "Admin üzenet");
 ```
 
+## Cha.yml-bol: csatornak fajlbol
+
+A csatornak es a slow-mode `chat.yml`-bol is betoltheto — nem kell kodot irni:
+
+```yaml
+# chat.yml
+default: global
+channels:
+  global:
+    format: "<dark_gray>[<aqua>G<dark_gray>] {name}<gray>: </gray>{message}"
+    hover: "<gray>Jatekos: <white>{player}"
+    suggest: "/msg {player} "
+  staff:
+    format: "<dark_red>[STAFF] {name}: {message}"
+    permission: "myp.chat.staff"
+  local:
+    format: "<green>[L] {name}: {message}"
+    range: 30
+slow-mode-seconds:
+  global: 3
+```
+
+```java
+ChatEngine.start(this);
+ChatEngine.loadFromConfig(this); // csatornak + default + slow-mode betoltese
+```
+
+## Slow-mode
+
+```java
+ChatEngine.setSlowMode("global", 5); // 5 masodperc varakozas minden adatra
+```
+
 ## Natív chat kikapcsolása
 
 Ha csak programatikus küldéshez kell az engine, de a natív chat marad az eredeti:
