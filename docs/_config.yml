@@ -4,9 +4,9 @@ subtitle: "Minden-egyben Minecraft plugin API — Paper 26.3"
 description: >-
   Egyszerű plugin fejlesztés Paper szerverhez: menük, szövegformázás,
   hologramok, animációk, paricsék és több — magyar dokumentációval.
-baseurl: "" # pl. "/paperkit", ha projekt-oldalként fut
-url: ""
-repository: "" # pl. "felhasznalonev/paperkit"
+baseurl: "/kyloapi" # projekt oldal: felhasznalonev.github.io/kyloapi
+url: "https://kylopvp.github.io"
+repository: "KyloPvP/kyloapi"
 
 # Téma és motor
 theme: just-the-docs
