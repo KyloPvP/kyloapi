@@ -45,9 +45,12 @@ public abstract class KitPlugin extends JavaPlugin {
     @Override
     public final void onDisable() {
         this.onShutdown();
+        hu.paperkit.chat.ChatEngine.cleanup();
+        hu.paperkit.hooks.packetevents.PacketEventsHook.terminate();
         if (configuration != null) {
             configuration.saveIfChanged();
         }
+        hu.paperkit.config.ConfigFile.saveAllRegistered();
         Kit.shutdown();
     }
 

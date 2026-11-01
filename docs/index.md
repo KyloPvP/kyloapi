@@ -64,6 +64,7 @@ public void onEnable() { /* a KitPlugin caseben az init auto-történik */ }
 | [Particle](particle) | Circle, sphere, spiral, beam, aura, stb. |
 | [HUD](hud)        | BossBar, Tab, Scoreboard |
 | [Sound](sound)    | Hangotok |
+| [Chat](chat)      | Csatornák, formátum, hover/click, local chat |
 | [Placeholders](placeholders) | `%kulcs%` csere |
 | [Task](task)      | TaskKit, Cooldown |
-| [Hooks](hooks)    | LuckPerms, Vault, PAPI, WorldGuard (tervezés) |
+| [Hooks](hooks)    | PacketEvents (kész), LuckPerms/Vault/PAPI/WorldGuard (tervezés) |
